@@ -9,7 +9,7 @@ RM				= rm -rf
 		#SOURCES#./	
 
 C_DIR			= src
-C_FILES			= check_file.c
+C_FILES			= check_file.c check_must.c
 					
 # C_FILES_BONUS	= 
 
