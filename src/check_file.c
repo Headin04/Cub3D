@@ -1,11 +1,11 @@
-#include "Cub3d.h"
+#include "../include/Cub3d.h"
 
 bool	print_error_msg(int key)
 {
 	if (key == WRONG_ARGS)
-		ft_dprintf("Error\nNot enough or too much arguments\n");
+		printf("Error\nNot enough or too much arguments\n");
 	if (key == WRONG_NAME)
-		ft_dprintf("Error\nWrong name of file\n");
+		printf("Error\nWrong name of file\n");
 	return (false);
 }
 bool	check_name(char **argv)

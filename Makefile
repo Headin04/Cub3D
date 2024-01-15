@@ -9,7 +9,15 @@ RM				= rm -rf
 		#SOURCES#./	
 
 C_DIR			= src
-C_FILES			= check_file.c
+C_FILES			= src/check_file.c		\
+				  src/check_must.c		\
+				  utils/cub3d.c			\
+				  utils/cub3d_utils_1.c	\
+				  utils/cub3d_utils_2.c	\
+				  utils/cub3d_split.c	\
+				  utils/cub3d_init.c	\
+				  utils/cub3d_lst.c		\
+				  utils/get_next_line.c	\
 					
 # C_FILES_BONUS	= 
 
@@ -26,7 +34,7 @@ OBJS			= $(patsubst %, $(O_DIR)/%, $(O_FILES))
 
 		#FLAGS#
 
-FLAGS			= -Wall -Wextra -g3 -MMD
+FLAGS			= -Wall -Wextra -Werror -g3 -MMD
 
 ifeq ($(debug), true)
 	FLAGS += -fsanitize=address,undefined -g3
@@ -37,8 +45,8 @@ endif
 		#INCLUDES#
 
 INCLUDES		= -I ./libft -I ./include
-LIBFTPRINTF			= ./Ft_printf/libftprintf.a
-# MLX				= ./minilibx-linux/libmlx.a ./minilibx-linux/libmlx_Linux.a
+# LIBFTPRINTF			= ./Ft_printf/libftprintf.a
+MLX				= ./minilibx-linux/libmlx.a ./minilibx-linux/libmlx_Linux.a
 
 		#RULES#
 
@@ -50,11 +58,11 @@ $(O_DIR):
 $(O_DIR)/%.o: $(C_DIR)/%.c
 				$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
-$(LIBFTPRINTF):
-				make -C ./Ft_printf all
+# $(LIBFTPRINTF):
+# 				make -C ./Ft_printf all
 
-# $(MLX):
-#make -C ./minilibx-linux all
+$(MLX):
+				make -s -C mlx_linux/ --no-print-directory	
 
 $(NAME): $(O_DIR) $(OBJS) $(LIBFTPRINTF) #$(MLX)
 				$(CC) $(OBJS) $(FLAGS) $(MFLAGS) $(LIBFTPRINTF) -o $@ 
@@ -66,7 +74,7 @@ $(NAME): $(O_DIR) $(OBJS) $(LIBFTPRINTF) #$(MLX)
 clean :
 				make -C ./Ft_printf clean
 				$(RM) $(O_DIR)
-# make -C ./minilibx-linux clean
+				make -C ./minilibx-linux clean
 
 fclean :
 				$(RM) $(O_DIR)
