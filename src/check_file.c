@@ -42,7 +42,7 @@ bool	check_file(int argc, char **argv, t_cub *cub)
 	return (true);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_cub cub;
 	check_file(argc, argv, &cub);

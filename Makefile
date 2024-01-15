@@ -20,6 +20,7 @@ SRC				=	$(addprefix $(OBJDIR)/, 	\
 					src/utils/cub3d_split.c		\
 					src/utils/cub3d_lst.c		\
 					src/utils/cub3d_free.c		\
+					src/utils/ft_strdup.c 		\
 					src/check_file.c			\
 					src/check_must.c)
 

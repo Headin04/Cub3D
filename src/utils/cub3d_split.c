@@ -12,7 +12,7 @@
 
 #include "../../include/Cub3d.h"
 
-char	*ft_strlcpy(char *dest, const char *src)
+char	*ft_strcpy(char *dest, const char *src)
 {
 	int	i;
 
@@ -40,10 +40,10 @@ char	*ft_strlcat(char *dest, const char *src, int size)
 
 char	**ft_tab(int nb_word, char *s, char c, char **split)
 {
-	int		j;
-	int		i;
-	int		k;
-	int		size_word;
+	int	j;
+	int	i;
+	int	k;
+	int	size_word;
 
 	k = 0;
 	i = 0;
@@ -105,7 +105,7 @@ char	*ft_join(char *s1, char const *s2)
 		len_s2 = ft_strlen(s2);
 	join = ft_calloc(sizeof(char), (len_s1 + len_s2 + 1));
 	if (s1)
-		ft_strlcpy(join, s1);
+		ft_strcpy(join, s1);
 	if (s2)
 		ft_strlcat(join, s2, (int)len_s1);
 	return (join);
