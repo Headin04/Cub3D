@@ -1,4 +1,4 @@
-#include "Cub3d.h"
+#include "../include/Cub3d.h"
 
 char	*get_next_line_map(int fd)
 {

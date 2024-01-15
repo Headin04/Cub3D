@@ -1,14 +1,14 @@
-#include "Cub3d.h"
+#include "../include/Cub3d.h"
 
 bool	print_error_msg(int key)
 {
 	if (key == DEFAULT)
 		perror("ERROR");
 	if (key == WRONG_ARGS)
-		ft_dprintf("ERROR: Not enough or too much arguments\n");
+		printf("ERROR: Not enough or too much arguments\n");
 	if (key == WRONG_NAME)
-		ft_dprintf("ERROR: Wrong name of file\n");
-	if (key == PATH_NO_FALSE)
+		printf("ERROR: Wrong name of file\n");
+	if (key == PATH_FALSE)
 		printf("ERROR: One of the texture's path is false\n");
 	return (false);
 }
@@ -42,7 +42,7 @@ bool	check_file(int argc, char **argv, t_cub *cub)
 	return (true);
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	t_cub cub;
 	check_file(argc, argv, &cub);

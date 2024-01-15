@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   cub3d_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ode-cleb <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 13:59:49 by ode-cleb          #+#    #+#             */
-/*   Updated: 2022/11/07 14:07:45 by ode-cleb         ###   ########.fr       */
+/*   Created: 2024/01/15 13:19:14 by eewu              #+#    #+#             */
+/*   Updated: 2024/01/15 13:21:36 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include  "libft.h"
 
-int	ft_isprint(int c)
+#include "../../include/Cub3d.h"
+
+void	ft_free_split(char **split)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	else
-		return (0);
+	(void)split;
 }
