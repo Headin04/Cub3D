@@ -1,88 +1,66 @@
-NAME = Cub3d
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/15 13:15:36 by eewu              #+#    #+#              #
+#    Updated: 2024/01/15 13:22:11 by eewu             ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-		#COMMAND#
+NAME			=	cub
 
-CC				= cc
-MKDIR			= mkdir -p
-RM				= rm -rf
+SRC				=	$(addprefix $(OBJDIR)/, 	\
+					src/utils/cub3d.c			\
+					src/utils/cub3d_utils_1.c	\
+					src/utils/cub3d_utils_2.c	\
+					src/utils/get_next_line.c	\
+					src/utils/cub3d_split.c		\
+					src/utils/cub3d_lst.c		\
+					src/utils/cub3d_free.c		\
+					src/check_file.c			\
+					src/check_must.c)
 
-		#SOURCES#./	
+INCLS			= 	include/*.h
 
-C_DIR			= src
-C_FILES			= src/check_file.c		\
-				  src/check_must.c		\
-				  utils/cub3d.c			\
-				  utils/cub3d_utils_1.c	\
-				  utils/cub3d_utils_2.c	\
-				  utils/cub3d_split.c	\
-				  utils/cub3d_init.c	\
-				  utils/cub3d_lst.c		\
-				  utils/get_next_line.c	\
+OBJ				= 	$(SRC:.c=.o)
+
+OBJDIR			= 	obj
+
+CC				= 	cc
+
+FLAGS			= 	-Wall -Wextra -Werror
+
+LIB				=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -o 
+
+RM				= 	rm -rf
+
+# all				: 	$(NAME)
+
+all				: 	lib
+					@make $(NAME) --no-print-directory
+
+lib			 	:
+					@make -s -C mlx_linux/ --no-print-directory				
+
+$(NAME) 		: 	$(OBJ) $(INCLS)
+				  	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+
+$(OBJDIR)/%.o : %.c
+					@mkdir -p $(@D)
+					$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c -o $@ $^
+
+clean			:
+		 			$(RM) $(OBJ) $(OBJDIR)
+					@make clean -s -C mlx_linux/ --no-print-directory
 					
-# C_FILES_BONUS	= 
 
-SRCS			= $(patsubst %, $(C_DIR)/%, $(C_FILES))
-# SRCS_BONUS		= $(patsubst %, $(C_DIR)/%, $(C_FILES_BONUS))
+fclean			:	clean
+					$(RM) $(NAME)
 
-		#OBJECTS#
+re				:	clean
+					make all
 
-O_DIR			= objs
-O_FILES			= $(C_FILES:.c=.o)
-# O_FILES_BONUS	= $(C_FILES_BONUS:.c=.o)
-OBJS			= $(patsubst %, $(O_DIR)/%, $(O_FILES))
-# OBJS_BONUS		= $(patsubst %, $(O_DIR)/%, $(O_FILES_BONUS))
-
-		#FLAGS#
-
-FLAGS			= -Wall -Wextra -Werror -g3 -MMD
-
-ifeq ($(debug), true)
-	FLAGS += -fsanitize=address,undefined -g3
-endif
-
-# MFLAGS			= -lXext -lX11
-
-		#INCLUDES#
-
-INCLUDES		= -I ./libft -I ./include
-# LIBFTPRINTF			= ./Ft_printf/libftprintf.a
-MLX				= ./minilibx-linux/libmlx.a ./minilibx-linux/libmlx_Linux.a
-
-		#RULES#
-
-all: ${NAME}
-
-$(O_DIR):
-				$(MKDIR) $(O_DIR)
-
-$(O_DIR)/%.o: $(C_DIR)/%.c
-				$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
-
-# $(LIBFTPRINTF):
-# 				make -C ./Ft_printf all
-
-$(MLX):
-				make -s -C mlx_linux/ --no-print-directory	
-
-$(NAME): $(O_DIR) $(OBJS) $(LIBFTPRINTF) #$(MLX)
-				$(CC) $(OBJS) $(FLAGS) $(MFLAGS) $(LIBFTPRINTF) -o $@ 
-#$(MLX) 
-
-# bonus: $(O_DIR) $(OBJS_BONUS) $(LIBFTPRINTF) $(MLX)
-# $(CC) $(OBJS_BONUS) $(FLAGS) $(MFLAGS) $(LIBFTPRINTF) $(MLX) -o $@
-
-clean :
-				make -C ./Ft_printf clean
-				$(RM) $(O_DIR)
-				make -C ./minilibx-linux clean
-
-fclean :
-				$(RM) $(O_DIR)
-				make -C ./Ft_printf fclean
-				$(RM) $(NAME)
-# $(RM) bonus
-#make -C ./minilibx-linux clean
-
-re : fclean all
-
-.PHONY: all clean fclean re 
+.PHONY			: 	all clean re
