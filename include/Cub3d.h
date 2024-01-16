@@ -76,14 +76,14 @@ typedef struct s_cub
 	t_map		map;
 }				t_cub;
 
-bool			print_error_msg(int key);
+void			print_error_msg(int key, t_cub *cub);
 
 /*PARSING*/
-bool			check_file(int argc, char **argv, t_cub *cub);
-bool			check_arg(int argc);
-bool			check_name(char **argv);
-bool			check_must(char *str, t_cub *cub);
-
+void			check_file(int argc, char **argv, t_cub *cub);
+void			check_arg(int argc, t_cub *cub);
+void			check_name(char **argv, t_cub *cub);
+void			check_must(char *str, t_cub *cub);
+void			free_cub(t_cub *cub);
 // ************************************Cub3D********************************* //
 
 // ************************************Init********************************** //
