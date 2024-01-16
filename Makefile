@@ -21,7 +21,11 @@ SRC				=	$(addprefix $(OBJDIR)/, 	\
 					src/utils/cub3d_lst.c		\
 					src/utils/cub3d_free.c		\
 					src/utils/ft_strdup.c 		\
+					src/utils/ft_atoi.c			\
+					src/utils/ft_strnjoin.c		\
 					src/check_file.c			\
+					src/check_textures.c 		\
+					src/check_color.c 			\
 					src/check_must.c)
 
 INCLS			= 	include/*.h

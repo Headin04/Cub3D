@@ -32,6 +32,7 @@
 # define WRONG_ARGS 1
 # define WRONG_NAME 2
 # define PATH_FALSE 3
+# define COLOR_FALSE 4
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -67,12 +68,21 @@ typedef struct s_vars
 	t_struct	*cub;
 }				t_vars;
 
+typedef struct s_rgb
+{
+	int			r;
+	int			g;
+	int			b;
+}				t_rgb;
+
 typedef struct s_cub
 {
 	char		*NO;
 	char		*SO;
 	char		*WE;
 	char		*EA;
+	t_rgb		*F;
+	t_rgb		*C;
 	t_map		map;
 }				t_cub;
 
@@ -83,6 +93,8 @@ void			check_file(int argc, char **argv, t_cub *cub);
 void			check_arg(int argc, t_cub *cub);
 void			check_name(char **argv, t_cub *cub);
 void			check_must(char *str, t_cub *cub);
+bool			check_for_textures(char *str, t_cub *cub);
+bool			check_for_color(char *str, t_cub *cub);
 void			free_cub(t_cub *cub);
 // ************************************Cub3D********************************* //
 
@@ -102,6 +114,9 @@ char			*ft_strrchr(const char *s, int c);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*get_next_line(int fd);
 char			*ft_strdup(char *);
+int				ft_atoi(const char *str);
+size_t			ft_strlcpy(char *dest, const char *src, size_t size);
+char			*ft_strnjoin(char *s1, char *s2, size_t size);
 char			*ft_gnljoin(char *stash, char *buf, int backsn_index, int size);
 // ***********************************Split********************************** //
 char			*ft_strlcat(char *dst, const char *src, int size);

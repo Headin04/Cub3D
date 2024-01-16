@@ -2,3 +2,6 @@ NO ./anim1.xpm
 SO ./anim1.xpm
 WE ./anim1.xpm
 EA ./anim1.xpm
+
+F 0, 23, 45
+C 56, 43, 0

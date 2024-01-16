@@ -10,6 +10,8 @@ void	print_error_msg(int key, t_cub *cub)
 		printf("ERROR: Wrong name of file\n");
 	if (key == PATH_FALSE)
 		printf("ERROR: One of the texture's path is false\n");
+	if (key == COLOR_FALSE)
+		printf("ERROR: One of the Color is false\n");
 	free_cub(cub);
 	exit(1);
 }
@@ -44,7 +46,25 @@ void	initialize(t_cub *cub)
 	cub->NO = NULL;
 	cub->SO = NULL;
 	cub->WE = NULL;
+	cub->F = NULL;
+	cub->C = NULL;
 }
+
+// void	free_rgb(t_cub *cub)
+// {
+// 	if (cub->F != NULL)
+// 	{
+// 		free(cub->F->r);
+// 		free(cub->F->g);
+// 		free(cub->F->b);
+// 	}
+// 	if (cub->C != NULL)
+// 	{
+// 		free(cub->C.r);
+// 		free(cub->C.g);
+// 		free(cub->C.b);
+// 	}
+// }
 
 void	free_cub(t_cub *cub)
 {
@@ -56,6 +76,7 @@ void	free_cub(t_cub *cub)
 		free(cub->SO);
 	if (cub->WE != NULL)
 		free(cub->WE);
+	free_rgb(cub);
 }
 
 int	main(int argc, char **argv)
