@@ -18,6 +18,12 @@ bool	check_for_dir(char *str, char *dir, t_cub *cub)
 	int	i;
 
 	i = 2;
+	if (cub->EA != NULL && cub->NO != NULL && cub->SO != NULL
+		&& cub->WE != NULL)
+	{
+		free(str);
+		print_error_msg(PATH_FALSE, cub);
+	}
 	if (ft_strncmp(str, dir, 2) == 0)
 	{
 		if (str[i] != ' ')
@@ -36,9 +42,6 @@ bool	check_for_dir(char *str, char *dir, t_cub *cub)
 
 bool	check_for_textures(char *str, t_cub *cub)
 {
-	size_t len;
-
-	len = ft_strlen(str);
 	if (cub->NO == NULL && check_for_dir(str, "NO", cub) == true)
 		return (cub->NO = ft_strdup(str + 3), true);
 	else if (cub->SO == NULL && check_for_dir(str, "SO", cub) == true)

@@ -48,35 +48,7 @@ void	initialize(t_cub *cub)
 	cub->WE = NULL;
 	cub->F = NULL;
 	cub->C = NULL;
-}
-
-// void	free_rgb(t_cub *cub)
-// {
-// 	if (cub->F != NULL)
-// 	{
-// 		free(cub->F->r);
-// 		free(cub->F->g);
-// 		free(cub->F->b);
-// 	}
-// 	if (cub->C != NULL)
-// 	{
-// 		free(cub->C.r);
-// 		free(cub->C.g);
-// 		free(cub->C.b);
-// 	}
-// }
-
-void	free_cub(t_cub *cub)
-{
-	if (cub->EA != NULL)
-		free(cub->EA);
-	if (cub->NO != NULL)
-		free(cub->NO);
-	if (cub->SO != NULL)
-		free(cub->SO);
-	if (cub->WE != NULL)
-		free(cub->WE);
-	free_rgb(cub);
+	cub->map = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -84,6 +56,12 @@ int	main(int argc, char **argv)
 	t_cub cub;
 	initialize(&cub);
 	check_file(argc, argv, &cub);
+	// while (cub.map != NULL)
+	// {
+	// 	printf("map == %s\n", cub.map->content);
+	// 	cub.map = cub.map->next;
+	// }
+	// cub.map = cub.start_map;
 	free_cub(&cub);
 	return (0);
 }

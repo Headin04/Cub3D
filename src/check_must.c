@@ -3,10 +3,8 @@
 char	*get_next_line_map(int fd)
 {
 	char	*str;
-	int		i;
 	size_t	len;
 
-	i = 0;
 	str = get_next_line(fd);
 	if (str == NULL)
 		return (NULL);
@@ -28,13 +26,12 @@ void	check_must(char *str, t_cub *cub)
 	str = get_next_line_map(fd);
 	while (str != NULL)
 	{
-		printf("popo\n");
 		if (check_for_textures(str, cub) == true)
 			n++;
-		else if (check_for_color(str, cub) == true)
+		else if (check_for_color(str, cub, n) == true)
 			n++;
-		// else if (n == 5)
-		// 	check_for_map(str, cub);
+		else if (n == 6)
+			check_for_map(str, cub);
 		free(str);
 		str = get_next_line_map(fd);
 	}

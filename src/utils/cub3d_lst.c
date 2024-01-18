@@ -12,17 +12,47 @@
 
 #include "../../include/Cub3d.h"
 
-
 // t_lst	*ft_lstnew(char *str)
 // {
 // 	return(0);
 // }
+
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new;
+
+	new = (t_list *)malloc(sizeof(t_list));
+	if (new != NULL)
+	{
+		new->content = content;
+		new->next = NULL;
+		return (new);
+	}
+	return (NULL);
+}
 
 // void	ft_lstadd_back(t_struct *sl, t_lst **head, t_lst *new)
 // {
 // 	return(0);
 // }
 
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last;
+
+	last = *lst;
+	if (new != NULL)
+	{
+		if (*lst != NULL)
+		{
+			while (last->next != NULL)
+				last = last->next;
+			last->next = new;
+		}
+		else
+			*lst = new;
+	}
+}
 // t_lst	*ft_lstcopy(t_struct *sl, t_lst *old_lst)
 // {
 // 	return(0);
