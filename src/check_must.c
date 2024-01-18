@@ -36,4 +36,5 @@ void	check_must(char *str, t_cub *cub)
 		str = get_next_line_map(fd);
 	}
 	close(fd);
+	check_map(cub);
 }

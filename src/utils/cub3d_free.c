@@ -33,6 +33,7 @@ void	free_map(t_list *lst)
 	while (lst != NULL)
 	{
 		list = lst->next;
+		free(lst->content);
 		free(lst);
 		lst = list;
 	}
@@ -58,5 +59,6 @@ void	free_cub(t_cub *cub)
 	if (cub->WE != NULL)
 		free(cub->WE);
 	free_rgb(cub);
-	free_map(cub->map);
+	free_map(cub->map->map_lst);
+	free(cub->map);
 }

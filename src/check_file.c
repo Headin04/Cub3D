@@ -12,6 +12,8 @@ void	print_error_msg(int key, t_cub *cub)
 		printf("ERROR: One of the texture's path is false\n");
 	if (key == COLOR_FALSE)
 		printf("ERROR: One of the Color is false\n");
+	if (key == WRONG_LETTERS)
+		printf("ERROR: The map contain wrong caracters\n");
 	free_cub(cub);
 	exit(1);
 }
@@ -48,7 +50,9 @@ void	initialize(t_cub *cub)
 	cub->WE = NULL;
 	cub->F = NULL;
 	cub->C = NULL;
-	cub->map = NULL;
+	cub->map = malloc(sizeof(t_map));
+	cub->map->map_lst = NULL;
+	cub->map->dir_player = 0;
 }
 
 int	main(int argc, char **argv)
