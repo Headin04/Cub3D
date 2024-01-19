@@ -35,19 +35,22 @@ void	check_characters(t_cub *cub)
 		}
 		alias = alias->next;
 	}
+	cub->map->map_line = i;
 	cub->map->map_lst = cub->map->start_map;
 }
 
 void	check_map(t_cub *cub)
 {
 	check_characters(cub);
-	// check_walls(cub);
+	check_walls(cub);
+	backtracking(cub);
 }
 
 void	check_for_map(char *str, t_cub *cub)
 {
-	int i;
-	t_list *tmp;
+	int		i;
+	t_list	*tmp;
+
 	i = 0;
 	tmp = NULL;
 	if (str[i] == '\0')

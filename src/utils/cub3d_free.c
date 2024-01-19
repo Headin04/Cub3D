@@ -59,6 +59,7 @@ void	free_cub(t_cub *cub)
 	if (cub->WE != NULL)
 		free(cub->WE);
 	free_rgb(cub);
+	cub->map->map_lst = cub->map->start_map;
 	free_map(cub->map->map_lst);
 	free(cub->map);
 }

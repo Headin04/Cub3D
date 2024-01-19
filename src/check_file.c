@@ -14,6 +14,8 @@ void	print_error_msg(int key, t_cub *cub)
 		printf("ERROR: One of the Color is false\n");
 	if (key == WRONG_LETTERS)
 		printf("ERROR: The map contain wrong caracters\n");
+	if (key == LEAK_IN_WALL)
+		printf("ERROR: There is a leak in the walls\n");
 	free_cub(cub);
 	exit(1);
 }

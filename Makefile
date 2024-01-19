@@ -27,6 +27,7 @@ SRC				=	$(addprefix $(OBJDIR)/, 	\
 					src/check_textures.c 		\
 					src/check_color.c 			\
 					src/check_must.c			\
+					src/check_walls.c 			\
 					src/check_map.c)
 
 INCLS			= 	include/*.h

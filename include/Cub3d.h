@@ -34,6 +34,7 @@
 # define PATH_FALSE 3
 # define COLOR_FALSE 4
 # define WRONG_LETTERS 5
+# define LEAK_IN_WALL 6
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -47,7 +48,6 @@
 // 	struct lst	*back;
 // }				t_lst;
 
-
 typedef struct s_list
 {
 	char			*content;
@@ -56,11 +56,13 @@ typedef struct s_list
 
 typedef struct s_map
 {
-	t_list 			*map_lst;
+	t_list			*map_lst;
 	t_list			*start_map;
-	char 			dir_player;
-	
-}	t_map;
+	char			dir_player;
+	int				len_max;
+	int				map_line;
+
+}					t_map;
 
 typedef struct main
 {
@@ -108,7 +110,8 @@ void				check_must(char *str, t_cub *cub);
 bool				check_for_textures(char *str, t_cub *cub);
 bool				check_for_color(char *str, t_cub *cub, int n);
 void				check_for_map(char *str, t_cub *cub);
-void 				check_map(t_cub *cub);
+void				check_map(t_cub *cub);
+void				check_walls(t_cub *cub);
 void				free_cub(t_cub *cub);
 // ************************************Cub3D********************************* //
 
