@@ -1,36 +1,43 @@
 #include "../include/Cub3d.h"
 
-void	backtracking(t_cub *cub, int x)
+void	backtracking(t_list *alias, int x, t_cub *cub)
 {
-	t_list	*alias;
-
-	alias = cub->map->map_lst;
+	printf("ici\n");
 	if (alias->content[x] == '1')
 		return ;
 	else if (alias->content[x] == '2')
 		return ;
 	else if (alias->content[x] == cub->map->dir_player)
-		alias->content[x] == '2';
+		alias->content[x] = '2';
 	else if (alias->content[x] == '0')
-		alias->content == '2';
+		alias->content[x] = '2';
 	else if (alias->content[x] == ' ')
 		print_error_msg(LEAK_IN_WALL, cub);
-	// backtracking()
+	backtracking(alias, x + 1, cub);
+	backtracking(alias, x - 1, cub);
+	backtracking(alias->next, x, cub);
+	backtracking(get_previous(cub->map->start_map_cloned, alias), x, cub);
 }
 
-void	ft_backtracking(cub)
+void	ft_backtracking(t_cub *cub)
 {
-	int y;
-	int x;
-	n = 0;
-	i = 0;
-	t_list *alias = cub->map->map_lst;
+	int		x;
+	t_list	*alias;
+
+	x = 0;
+	cub->map->map_cloned = cub->map->start_map_cloned;
+	alias = cub->map->map_cloned;
 	while (alias != NULL)
 	{
-		while (alias->content != '\0')
+		// printf("ici\n");
+		x = 0;
+		while (alias->content[x] != '\0')
 		{
-			if (alias->content == '0')
-				backtracking(cub, x);
+			printf("content == %c\n", alias->content[x]);
+			if (alias->content[x] == '0')
+				backtracking(alias, x, cub);
+			x++;
 		}
+		alias = alias->next;
 	}
 }

@@ -17,6 +17,25 @@
 // 	return(0);
 // }
 
+t_list	*get_previous(t_list *list, t_list *current)
+{
+	t_list	*prev;
+	t_list	*tmp;
+
+	prev = NULL;
+	tmp = list;
+	while (tmp != NULL)
+	{
+		if (tmp->next == current)
+		{
+			prev = tmp;
+			break ;
+		}
+		tmp = tmp->next;
+	}
+	return (prev);
+}
+
 t_list	*ft_lstnew(void *content)
 {
 	t_list	*new;

@@ -57,6 +57,8 @@ typedef struct s_list
 typedef struct s_map
 {
 	t_list			*map_lst;
+	t_list			*map_cloned;
+	t_list			*start_map_cloned;
 	t_list			*start_map;
 	char			dir_player;
 	int				len_max;
@@ -77,7 +79,6 @@ typedef struct s_vars
 {
 	void			*mlx;
 	void			*win;
-
 	void			*img;
 	t_struct		*cub;
 }					t_vars;
@@ -112,6 +113,7 @@ bool				check_for_color(char *str, t_cub *cub, int n);
 void				check_for_map(char *str, t_cub *cub);
 void				check_map(t_cub *cub);
 void				check_walls(t_cub *cub);
+void				ft_backtracking(t_cub *cub);
 void				free_cub(t_cub *cub);
 // ************************************Cub3D********************************* //
 
@@ -149,5 +151,6 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 t_list				*ft_lstcopy(t_struct *sl, t_list *old_lst);
 t_list				*ft_lstlast(t_list *lst);
 int					ft_lstsize(t_list *lst);
+t_list				*get_previous(t_list *list, t_list *current);
 
 #endif

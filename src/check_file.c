@@ -54,6 +54,7 @@ void	initialize(t_cub *cub)
 	cub->C = NULL;
 	cub->map = malloc(sizeof(t_map));
 	cub->map->map_lst = NULL;
+	cub->map->map_cloned = NULL;
 	cub->map->dir_player = 0;
 }
 
@@ -62,12 +63,12 @@ int	main(int argc, char **argv)
 	t_cub cub;
 	initialize(&cub);
 	check_file(argc, argv, &cub);
-	// while (cub.map != NULL)
-	// {
-	// 	printf("map == %s\n", cub.map->content);
-	// 	cub.map = cub.map->next;
-	// }
-	// cub.map = cub.start_map;
+	cub.map->map_cloned = cub.map->start_map_cloned;
+	while (cub.map->map_cloned != NULL)
+	{
+		printf("map == %s\n", cub.map->map_cloned->content);
+		cub.map->map_cloned = cub.map->map_cloned->next;
+	}
 	free_cub(&cub);
 	return (0);
 }

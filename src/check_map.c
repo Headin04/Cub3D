@@ -20,6 +20,7 @@ void	check_characters(t_cub *cub)
 	int		i;
 	t_list	*alias;
 
+	i = 0;
 	alias = cub->map->map_lst;
 	while (alias != NULL)
 	{
@@ -31,7 +32,8 @@ void	check_characters(t_cub *cub)
 			check_letters(alias, i, cub);
 			while (alias->content[i] == ' ')
 				i++;
-			i++;
+			if (alias->content[i] != '\0')
+				i++;
 		}
 		alias = alias->next;
 	}
@@ -42,8 +44,10 @@ void	check_characters(t_cub *cub)
 void	check_map(t_cub *cub)
 {
 	check_characters(cub);
+	if (cub->map->dir_player == 0)
+		print_error_msg(WRONG_LETTERS, cub);
 	check_walls(cub);
-	backtracking(cub);
+	ft_backtracking(cub);
 }
 
 void	check_for_map(char *str, t_cub *cub)

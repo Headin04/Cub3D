@@ -14,10 +14,24 @@ char	*get_next_line_map(int fd)
 	return (str);
 }
 
+t_list	*cpy_lst(t_list *lst)
+{
+	t_list	*current;
+
+	current = NULL;
+	while (lst != NULL)
+	{
+		ft_lstadd_back(&current, ft_lstnew(ft_strnjoin(NULL, lst->content,
+					ft_strlen(lst->content))));
+		lst = lst->next;
+	}
+	return (current);
+}
+
 void	check_must(char *str, t_cub *cub)
 {
-	int fd;
-	int n;
+	int	fd;
+	int	n;
 
 	n = 0;
 	fd = open(str, O_RDONLY);
@@ -36,5 +50,7 @@ void	check_must(char *str, t_cub *cub)
 		str = get_next_line_map(fd);
 	}
 	close(fd);
+	cub->map->map_cloned = cpy_lst(cub->map->map_lst);
+	cub->map->start_map_cloned = cub->map->map_cloned;
 	check_map(cub);
 }
