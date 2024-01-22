@@ -12,7 +12,10 @@ void	check_letters(t_list *alias, int i, t_cub *cub)
 		cub->map->dir_player = 'W';
 	else if (alias->content[i] != '1' && alias->content[i] != '0'
 		&& alias->content[i] != ' ')
+	{
+		printf("ici\n");
 		print_error_msg(WRONG_LETTERS, cub);
+	}
 }
 
 void	check_characters(t_cub *cub)
@@ -21,11 +24,12 @@ void	check_characters(t_cub *cub)
 	t_list	*alias;
 
 	i = 0;
+	cub->map->map_lst = cub->map->start_map;
 	alias = cub->map->map_lst;
 	while (alias != NULL)
 	{
 		i = 0;
-		while (cub->map->map_lst->content[i] == ' ')
+		while (alias->content[i] == ' ')
 			i++;
 		while (alias->content[i] != '\0')
 		{
