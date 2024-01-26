@@ -35,6 +35,7 @@
 # define COLOR_FALSE 4
 # define WRONG_LETTERS 5
 # define LEAK_IN_WALL 6
+# define DOUBLE_MAP 7
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -114,6 +115,7 @@ void				check_for_map(char *str, t_cub *cub);
 void				check_map(t_cub *cub);
 void				check_walls(t_cub *cub);
 void				ft_backtracking(t_cub *cub);
+void				free_map(t_list *lst);
 void				free_cub(t_cub *cub);
 // ************************************Cub3D********************************* //
 

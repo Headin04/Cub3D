@@ -54,6 +54,26 @@ void	check_map(t_cub *cub)
 	ft_backtracking(cub);
 }
 
+bool	skip_space_in_map(char *str, t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == ' ')
+	{
+		while (str[i] == ' ')
+			i++;
+		if (str[i] == '\0' && cub->map->map_lst == NULL)
+			return (false);
+		else if (str[i] == '\0' && cub->map->map_lst != NULL)
+		{
+			free(str);
+			print_error_msg(LEAK_IN_WALL, cub);
+		}
+	}
+	return (true);
+}
+
 void	check_for_map(char *str, t_cub *cub)
 {
 	int		i;
@@ -61,15 +81,15 @@ void	check_for_map(char *str, t_cub *cub)
 
 	i = 0;
 	tmp = NULL;
-	if (str[i] == '\0')
-		return ;
-	if (str[i] == ' ')
+	if (str[i] == '\0' && cub->map->map_lst != NULL)
 	{
-		while (str[i] == ' ')
-			i++;
-		if (str[i] == '\0')
-			return ;
+		free(str);
+		print_error_msg(DOUBLE_MAP, cub);
 	}
+	else if (str[i] == '\0')
+		return ;
+	if (skip_space_in_map(str, cub) == false)
+		return ;
 	if (cub->map->map_lst == NULL)
 	{
 		cub->map->map_lst = ft_lstnew(ft_strnjoin(NULL, str, ft_strlen(str)));

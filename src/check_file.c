@@ -15,7 +15,9 @@ void	print_error_msg(int key, t_cub *cub)
 	if (key == WRONG_LETTERS)
 		printf("ERROR: The map contain wrong caracters\n");
 	if (key == LEAK_IN_WALL)
-		printf("ERROR: There is a leak in the walls\n");
+		printf("ERROR: There is a leak\n");
+	if (key == DOUBLE_MAP)
+		printf("ERROR: The file contain two maps \n");
 	free_cub(cub);
 	exit(1);
 }
@@ -64,11 +66,11 @@ int	main(int argc, char **argv)
 	initialize(&cub);
 	check_file(argc, argv, &cub);
 	cub.map->map_cloned = cub.map->start_map_cloned;
-	while (cub.map->map_cloned != NULL)
-	{
-		printf("map == %s\n", cub.map->map_cloned->content);
-		cub.map->map_cloned = cub.map->map_cloned->next;
-	}
+	// while (cub.map->map_cloned != NULL)
+	// {
+	// 	printf("map == %s\n", cub.map->map_cloned->content);
+	// 	cub.map->map_cloned = cub.map->map_cloned->next;
+	// }
 	free_cub(&cub);
 	return (0);
 }

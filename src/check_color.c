@@ -80,7 +80,11 @@ void	check_format_rgb(char *rgb, t_cub *cub, char *str)
 		}
 	}
 	if (n >= 3)
+	{
+		free(rgb);
+		free(str);
 		print_error_msg(COLOR_FALSE, cub);
+	}
 }
 
 bool	Check_rgb(char *str, t_cub *cub, char c)

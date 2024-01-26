@@ -59,9 +59,11 @@ void	free_cub(t_cub *cub)
 	if (cub->WE != NULL)
 		free(cub->WE);
 	free_rgb(cub);
-	cub->map->map_lst = cub->map->start_map;
+	if (cub->map->map_lst != NULL)
+		cub->map->map_lst = cub->map->start_map;
 	free_map(cub->map->map_lst);
-	cub->map->map_cloned = cub->map->start_map_cloned;
+	if (cub->map->map_cloned != NULL)
+		cub->map->map_cloned = cub->map->start_map_cloned;
 	free_map(cub->map->map_cloned);
 	free(cub->map);
 }
