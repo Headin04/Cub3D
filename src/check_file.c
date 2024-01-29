@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:35:50 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 15:14:24 by eewu             ###   ########.fr       */
+/*   Updated: 2024/01/29 15:42:20 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,4 @@ void	initialize(t_cub *cub)
 	cub->map->map_lst = NULL;
 	cub->map->map_cloned = NULL;
 	cub->map->dir_player = 0;
-}
-
- int	main(int argc, char **argv)
-{
-	t_cub cub;
-	initialize(&cub);
-	check_file(argc, argv, &cub);
-	cub.map->map_cloned = cub.map->start_map_cloned;
-	// ft_init (&cub, ac, av);
-	ft_mlx_start(&cub);
-	// while (cub.map->map_cloned != NULL)
-	// {
-	// 	printf("map == %s\n", cub.map->map_cloned->content);
-	// 	cub.map->map_cloned = cub.map->map_cloned->next;
-	// }
-	free_cub(&cub);
-	return (0);
 }

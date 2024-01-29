@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_walls.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/29 15:42:35 by eewu              #+#    #+#             */
+/*   Updated: 2024/01/29 15:42:50 by eewu             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/Cub3d.h"
 
 void	check_first_last_line(t_cub *cub)
@@ -25,6 +37,7 @@ void	check_first_last_line(t_cub *cub)
 	}
 	cub->map->map_lst = cub->map->start_map;
 }
+
 void	check_left(t_cub *cub)
 {
 	t_list	*alias;
@@ -38,6 +51,7 @@ void	check_left(t_cub *cub)
 	}
 	cub->map->map_lst = cub->map->start_map;
 }
+
 void	check_right(t_cub *cub)
 {
 	int		len;

@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:00:58 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 14:30:35 by eewu             ###   ########.fr       */
+/*   Updated: 2024/01/29 15:32:34 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static	int	ft_display(t_vars *vars)
 	return (0);
 }
 
-void	ft_mlx_start(t_struct *cub)
+void	ft_mlx_start(t_cub *cub)
 {
 	t_vars	vars;
 

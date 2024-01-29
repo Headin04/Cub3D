@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:51:11 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 14:08:05 by eewu             ###   ########.fr       */
+/*   Updated: 2024/01/29 15:34:45 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@
 // 					1000100000000001 \
 // 					1000000000000001 \
 // 					1111111111111111", ' ');
-// 	retour (map);
+// 	return (map);
 // }
 
-void	ft_init(t_struct *cub, int ac, char **av)
-{
-	cub->av = av;
-	cub->ac = ac;
+// void	ft_init(t_cub *cub, int ac, char **av)
+// {
+// 	cub->av = av;
+// 	cub->ac = ac;
 
-}
+// }
 
 static	int	ft_init_texture(t_vars *vars)
 {
