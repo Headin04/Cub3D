@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:19:14 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/23 12:04:10 by eewu             ###   ########.fr       */
+/*   Updated: 2024/01/29 15:18:12 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,49 @@ void	ft_free_split(char **split)
 		free(split[i++]);
 	free(split);
 	return ;
+}
+
+void	free_map(t_list *lst)
+{
+	t_list	*list;
+
+	list = NULL;
+	while (lst != NULL)
+	{
+		list = lst->next;
+		free(lst->content);
+		free(lst);
+		lst = list;
+	}
+	free(lst);
+}
+
+void	free_rgb(t_cub *cub)
+{
+	if (cub->F != NULL)
+		free(cub->F);
+	if (cub->C != NULL)
+		free(cub->C);
+}
+
+void	free_cub(t_cub *cub)
+{
+	if (cub->EA != NULL)
+		free(cub->EA);
+	if (cub->NO != NULL)
+		free(cub->NO);
+	if (cub->SO != NULL)
+		free(cub->SO);
+	if (cub->WE != NULL)
+		free(cub->WE);
+	free_rgb(cub);
+	if (cub->map->map_lst != NULL)
+		cub->map->map_lst = cub->map->start_map;
+	free_map(cub->map->map_lst);
+	if (cub->map->map_cloned != NULL)
+		cub->map->map_cloned = cub->map->start_map_cloned;
+	free_map(cub->map->map_cloned);
+	free(cub->map);
 }
 
 void	ft_free_exit(int i, t_vars *vars)
@@ -51,3 +94,4 @@ void	ft_free_mlx(t_vars *vars)
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
 }
+

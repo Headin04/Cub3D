@@ -6,61 +6,85 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:35:50 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/22 13:27:08 by eewu             ###   ########.fr       */
+/*   Updated: 2024/01/29 15:14:24 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Cub3d.h"
 
-// bool	print_error_msg(int key)
-// {
-// 	if (key == WRONG_ARGS)
-// 		printf("Error\nNot enough or too much arguments\n");
-// 	if (key == WRONG_NAME)
-// 		printf("Error\nWrong name of file\n");
-// 	return (false);
-// }
-// bool	check_name(char **argv)
-// {
-// 	char	*str;
-
-// 	str = ft_strrchr(argv[1], '.');
-// 	if (str == NULL)
-// 		return (print_error_msg(2));
-// 	else if (ft_strncmp(str, ".cub", 4) != 0)
-// 		return (print_error_msg(2));
-// 	return (true);
-// }
-
-// bool	check_arg(int argc)
-// {
-// 	if (argc != 2)
-// 		return (print_error_msg(WRONG_ARGS));
-// 	return (true);
-// }
-
-// bool	check_file(int argc, char **argv, t_win *win)
-// {
-// 	if (check_arg(argc) == false)
-// 		return (false);
-// 	if (check_name(argv) == false)
-// 		return (false);
-// 	if (check_must(argv[1]) == false)
-// 		return (false);
-// }
-
-// int	main()
-// {
-// 	// t_win win;
-// 	// check_file(argc, argv, &win);
-// 	return (0);
-// }
-
-int	main(int ac, char **av)
+void	print_error_msg(int key, t_cub *cub)
 {
-	t_struct	cub;
+	if (key == DEFAULT)
+		perror("ERROR");
+	if (key == WRONG_ARGS)
+		printf("ERROR: Not enough or too much arguments\n");
+	if (key == WRONG_NAME)
+		printf("ERROR: Wrong name of file\n");
+	if (key == PATH_FALSE)
+		printf("ERROR: One of the texture's path is false\n");
+	if (key == COLOR_FALSE)
+		printf("ERROR: One of the Color is false\n");
+	if (key == WRONG_LETTERS)
+		printf("ERROR: The map contain wrong caracters\n");
+	if (key == LEAK_IN_WALL)
+		printf("ERROR: There is a leak\n");
+	if (key == DOUBLE_MAP)
+		printf("ERROR: The file contain two maps \n");
+	free_cub(cub);
+	exit(1);
+}
 
-	ft_init (&cub, ac, av);
+void	check_name(char **argv, t_cub *cub)
+{
+	char	*str;
+
+	str = ft_strrchr(argv[1], '.');
+	if (str == NULL)
+		print_error_msg(WRONG_NAME, cub);
+	else if (ft_strncmp(str, ".cub", 4) != 0)
+		print_error_msg(WRONG_NAME, cub);
+}
+
+void	check_arg(int argc, t_cub *cub)
+{
+	if (argc != 2)
+		print_error_msg(WRONG_ARGS, cub);
+}
+
+void	check_file(int argc, char **argv, t_cub *cub)
+{
+	check_arg(argc, cub);
+	check_name(argv, cub);
+	check_must(argv[1], cub);
+}
+
+void	initialize(t_cub *cub)
+{
+	cub->EA = NULL;
+	cub->NO = NULL;
+	cub->SO = NULL;
+	cub->WE = NULL;
+	cub->F = NULL;
+	cub->C = NULL;
+	cub->map = malloc(sizeof(t_map));
+	cub->map->map_lst = NULL;
+	cub->map->map_cloned = NULL;
+	cub->map->dir_player = 0;
+}
+
+ int	main(int argc, char **argv)
+{
+	t_cub cub;
+	initialize(&cub);
+	check_file(argc, argv, &cub);
+	cub.map->map_cloned = cub.map->start_map_cloned;
+	// ft_init (&cub, ac, av);
 	ft_mlx_start(&cub);
+	// while (cub.map->map_cloned != NULL)
+	// {
+	// 	printf("map == %s\n", cub.map->map_cloned->content);
+	// 	cub.map->map_cloned = cub.map->map_cloned->next;
+	// }
+	free_cub(&cub);
 	return (0);
 }

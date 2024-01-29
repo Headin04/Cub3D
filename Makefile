@@ -6,7 +6,7 @@
 #    By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 13:15:36 by eewu              #+#    #+#              #
-#    Updated: 2024/01/29 14:37:06 by eewu             ###   ########.fr        #
+#    Updated: 2024/01/29 15:02:27 by eewu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,19 @@ SRC				=	$(addprefix $(OBJDIR)/, 	\
 					src/utils/cub3d_split.c		\
 					src/utils/cub3d_lst.c		\
 					src/utils/cub3d_free.c		\
+					src/utils/ft_strdup.c 		\
+					src/utils/ft_atoi.c			\
+					src/utils/ft_strnjoin.c		\
 					src/utils/cub3d_init.c		\
 					src/utils/cub3d_keypress.c	\
 					src/utils/cub3d_ray.c	\
 					src/check_file.c			\
-					src/check_must.c)
+					src/check_textures.c 		\
+					src/check_color.c 			\
+					src/check_must.c			\
+					src/check_walls.c 			\
+					src/backtracking.c			\
+					src/check_map.c)
 
 
 OBJ				= 	$(SRC:.c=.o)
