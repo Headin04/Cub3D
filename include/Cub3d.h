@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:17:57 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 15:56:44 by eewu             ###   ########.fr       */
+/*   Updated: 2024/01/29 16:07:19 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,23 +200,22 @@ void				ft_free_mlx(t_vars *vars);
 // ***********************************Errors********************************* //
 
 // ************************************STR*********************************** //
+char				*ft_strdup(char *s);
+char				*get_next_line(int fd);
+char				*ft_gnljoin(char *stash, char *buf, int backsn_index,
+						int size);
+// ***********************************Utils1********************************* //
 size_t				ft_strlen(const char *s);
 void				*ft_calloc(size_t nmemb, size_t size);
 void				ft_bzero(void *s, size_t n);
 int					ft_backsn(char *buf);
-char				*ft_strrchr(const char *s, int c);
-int					ft_strncmp(const char *s1, const char *s2, size_t n);
-char				*get_next_line(int fd);
-char				*ft_strdup(char *s);
-int					ft_atoi(const char *str);
-size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 char				*ft_strnjoin(char *s1, char *s2, size_t size);
-char				*ft_gnljoin(char *stash, char *buf, int backsn_index,
-						int size);
 // ***********************************Utils2********************************* //
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strrchr(const char *s, int c);
 void				*ft_memset(void *s, int c, size_t n);
+int					ft_atoi(const char *str);
+size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 // ***********************************Split********************************** //
 char				*ft_strlcat(char *dst, const char *src, int size);
 char				*ft_strcpy(char *dest, const char *src);

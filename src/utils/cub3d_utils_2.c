@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:46:14 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/23 11:54:09 by eewu             ###   ########.fr       */
+/*   Updated: 2024/01/29 16:01:44 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,52 @@ void	*ft_memset(void *s, int c, size_t n)
 		i++;
 	}
 	return (str);
+}
+
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	signe;
+	int	a;
+
+	i = 0;
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	signe = 1;
+	if (str[i] == 45 || str[i] == 43)
+	{
+		if (str[i] == 45)
+			signe *= -1;
+		i++;
+	}
+	a = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		a = a * 10 + str[i] - '0';
+		i++;
+	}
+	return (signe * a);
+}
+
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	a;
+
+	i = 0;
+	a = 0;
+	if (size != '\0')
+	{
+		while (i + 1 < size && src[i] != '\0')
+		{
+			dest[i] = src[i];
+			i++;
+		}
+		dest[i] = '\0';
+		i++;
+	}
+	while (src[a] != '\0')
+		a++;
+	return (a);
 }
 
