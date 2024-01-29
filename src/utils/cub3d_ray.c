@@ -6,28 +6,47 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:58:15 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 15:57:06 by eewu             ###   ########.fr       */
+/*   Updated: 2024/01/29 17:32:34 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/Cub3d.h"
+
+static	double	ft_dir(char dir, int n, int x)
+{
+	if (n == 0)
+	{
+		if ((dir == 'N' && x == 0) || (dir == 'W' && x == 1))
+			return (-1);
+		else if ((dir == 'S' && x == 0) || (dir == 'E' && x == 1))
+			return (1);
+	}
+	else
+	{
+		if ((dir == 'E' && x == 0) || (dir == 'N' && x == 1))
+			return (0.66);
+		else if ((dir == 'W' && x == 0) || (dir == 'S' && x == 1))
+			return (-0.66);
+	}
+	return (0);
+}
 
 void	ft_rayinit(t_vars *vars)
 {
 	vars->ray.x = 0;
 	vars->ray.posx = 10;
 	vars->ray.posy = 2;
-	vars->ray.dirx = -1;
-	vars->ray.dirx = 0;
-	vars->ray.planx = 0;
-	vars->ray.plany = 0.66;
+	vars->ray.dirx = ft_dir(vars->dir, 0, 0);
+	vars->ray.diry = ft_dir(vars->dir, 0, 1);
+	vars->ray.planx = ft_dir(vars->dir, 1, 0);
+	vars->ray.plany = ft_dir(vars->dir, 1, 1);
 }
 
-	// vars->ray.dirx = vars->n + vars->s;
-	// vars->ray.dirx = vars->w + vars->e;
-	// vars->ray.planx = vars->e + vars->w;
-	// vars->ray.plany = vars->n + vars->s;
-
+	// printf("vars->dir = %c\n", vars->dir);
+	// printf("vars->ray.dirx = %f\n", vars->ray.dirx);
+	// printf("vars->ray.diry =  %f\n", vars->ray.diry);
+	// printf("vars->ray.planx =  %f\n", vars->ray.planx);
+	// printf("vars->ray.plany =  %f\n", vars->ray.plany);
 // 	dirx; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
 // 	diry; //vecteur de direction (commence à -1 pour W, 1 pour E, 0 sinon)
 // 	planx; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)

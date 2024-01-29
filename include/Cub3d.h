@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:17:57 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 16:07:19 by eewu             ###   ########.fr       */
+/*   Updated: 2024/01/29 16:35:15 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct s_vars
 	void			*mlx;
 	void			*win;
 	// void			*img;
+	char			dir;
 	int				rx;
 	int				ry;
 	int				sizex;
@@ -164,6 +165,13 @@ typedef struct s_cub
 	t_map			*map;
 }					t_cub;
 
+
+// ***********************************Display******************************** //
+void				img_pix_put(t_img *img, int x, int y, int color);
+void				ft_walls(t_vars *vars);
+int					ft_background(t_vars *vars);
+int					ft_texture(t_vars *vars, int i, int x, int y);
+int					ft_display(t_vars *vars);
 // *********************************Check_File******************************* //
 void				print_error_msg(int key, t_cub *cub);
 void				check_name(char **argv, t_cub *cub);
@@ -191,7 +199,7 @@ void				ft_mlx_start(t_cub *cub);
 
 // ************************************Init********************************** //
 void				ft_init(t_cub *cub, int ac, char **av);
-void				ft_init_mlx(t_vars *vars);
+void				ft_init_mlx(t_vars *vars, t_cub cub);
 
 // ************************************Free********************************** //
 void				ft_free_split(char **split);
@@ -224,9 +232,7 @@ char				**ft_split(char *s, char c);
 char				*ft_join(char *s1, char const *s2);
 // ************************************LST*********************************** //
 t_list				*ft_lstnew(void *content);
-// void			ft_lstadd_back(t_struct *sl, t_lst **head, t_lst *new);
 void				ft_lstadd_back(t_list **lst, t_list *new);
-// t_list				*ft_lstcopy(t_struct *sl, t_list *old_lst);
 t_list				*ft_lstlast(t_list *lst);
 int					ft_lstsize(t_list *lst);
 // *********************************Keypress********************************* //

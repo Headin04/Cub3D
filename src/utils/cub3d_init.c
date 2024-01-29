@@ -6,33 +6,11 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:51:11 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 15:34:45 by eewu             ###   ########.fr       */
+/*   Updated: 2024/01/29 16:46:32 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/Cub3d.h"
-
-// static char	**ft_map(void)
-// {
-// 	char	**map;
-
-// 	map = ft_split("1111111111111111 \
-// 					1000000000000001 \
-// 					1000111111000001 \
-// 					1000100000000001 \
-// 					1000100000000001 \
-// 					1000100000000001 \
-// 					1000000000000001 \
-// 					1111111111111111", ' ');
-// 	return (map);
-// }
-
-// void	ft_init(t_cub *cub, int ac, char **av)
-// {
-// 	cub->av = av;
-// 	cub->ac = ac;
-
-// }
 
 static	int	ft_init_texture(t_vars *vars)
 {
@@ -53,7 +31,7 @@ static	int	ft_init_texture(t_vars *vars)
 	return (0);
 }
 
-void	ft_init_mlx(t_vars *vars)
+void	ft_init_mlx(t_vars *vars, t_cub cub)
 {
 	int		m;
 	t_img	img;
@@ -72,15 +50,11 @@ void	ft_init_mlx(t_vars *vars)
 		ft_free_mlx(vars);
 	vars->img = img;
 	ft_memset(vars->wall, 0, sizeof(t_img) * 4);
-	vars->wall[0].path = "./textures/wall_no.xpm";
-	vars->wall[1].path = "./textures/wall_su.xpm";
-	vars->wall[2].path = "./textures/wall_es.xpm";
-	vars->wall[3].path = "./textures/wall_we.xpm";
+	vars->wall[0].path = cub.NO;
+	vars->wall[1].path = cub.SO;
+	vars->wall[2].path = cub.EA;
+	vars->wall[3].path = cub.WE;
+	vars->dir = cub.map->dir_player;
 	vars->rx = 0;
 	ft_init_texture(vars);
 }
-
-	// img.addr[y * ];
-	// posx + 4 * llen * posy;
-	// posx * 4 + 4 * llen * posy;
-	// 4 (posx + (llen * posy)); 
