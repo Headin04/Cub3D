@@ -6,12 +6,11 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:46:14 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/15 13:09:34 by eewu             ###   ########.fr       */
+/*   Updated: 2024/01/23 11:54:09 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/Cub3d.h"
-
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -43,5 +42,20 @@ char	*ft_strrchr(const char *s, int c)
 	if (s[s_len] == (unsigned char)c)
 		return ((char *)&s[s_len]);
 	return (0);
+}
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	size_t	i;
+	char	*str;
+
+	i = 0;
+	str = (char *)s;
+	while (i < n)
+	{
+		str[i] = c;
+		i++;
+	}
+	return (str);
 }
 

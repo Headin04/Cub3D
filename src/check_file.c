@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_file.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/15 15:35:50 by eewu              #+#    #+#             */
+/*   Updated: 2024/01/22 13:27:08 by eewu             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/Cub3d.h"
 
 // bool	print_error_msg(int key)
@@ -37,9 +49,18 @@
 // 		return (false);
 // }
 
-int	main()
+// int	main()
+// {
+// 	// t_win win;
+// 	// check_file(argc, argv, &win);
+// 	return (0);
+// }
+
+int	main(int ac, char **av)
 {
-	// t_win win;
-	// check_file(argc, argv, &win);
+	t_struct	cub;
+
+	ft_init (&cub, ac, av);
+	ft_mlx_start(&cub);
 	return (0);
 }

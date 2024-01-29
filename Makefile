@@ -6,11 +6,13 @@
 #    By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 13:15:36 by eewu              #+#    #+#              #
-#    Updated: 2024/01/15 13:22:11 by eewu             ###   ########.fr        #
+#    Updated: 2024/01/29 14:37:06 by eewu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	cub
+
+INCLS			= 	include/*.h
 
 SRC				=	$(addprefix $(OBJDIR)/, 	\
 					src/utils/cub3d.c			\
@@ -20,10 +22,12 @@ SRC				=	$(addprefix $(OBJDIR)/, 	\
 					src/utils/cub3d_split.c		\
 					src/utils/cub3d_lst.c		\
 					src/utils/cub3d_free.c		\
+					src/utils/cub3d_init.c		\
+					src/utils/cub3d_keypress.c	\
+					src/utils/cub3d_ray.c	\
 					src/check_file.c			\
 					src/check_must.c)
 
-INCLS			= 	include/*.h
 
 OBJ				= 	$(SRC:.c=.o)
 
@@ -31,9 +35,9 @@ OBJDIR			= 	obj
 
 CC				= 	cc
 
-FLAGS			= 	-Wall -Wextra -Werror
+FLAGS			= 	-Wall -Wextra -Werror -g
 
-LIB				=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -o 
+LIB				=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm
 
 RM				= 	rm -rf
 
@@ -46,7 +50,7 @@ lib			 	:
 					@make -s -C mlx_linux/ --no-print-directory				
 
 $(NAME) 		: 	$(OBJ) $(INCLS)
-				  	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+				  	$(CC) $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
 
 $(OBJDIR)/%.o : %.c
 					@mkdir -p $(@D)
@@ -60,7 +64,7 @@ clean			:
 fclean			:	clean
 					$(RM) $(NAME)
 
-re				:	clean
+re				:	fclean
 					make all
 
 .PHONY			: 	all clean re
