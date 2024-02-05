@@ -60,12 +60,12 @@ void	check_file(int argc, char **argv, t_cub *cub)
 
 void	initialize(t_cub *cub)
 {
-	cub->EA = NULL;
-	cub->NO = NULL;
-	cub->SO = NULL;
-	cub->WE = NULL;
-	cub->F = NULL;
-	cub->C = NULL;
+	cub->ea = NULL;
+	cub->no = NULL;
+	cub->so = NULL;
+	cub->we = NULL;
+	cub->f = NULL;
+	cub->c = NULL;
 	cub->map = malloc(sizeof(t_map));
 	cub->map->map_lst = NULL;
 	cub->map->map_cloned = NULL;

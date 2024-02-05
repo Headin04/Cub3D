@@ -16,12 +16,9 @@
 # include "../mlx_linux/mlx.h"
 # include <X11/keysym.h>
 # include <errno.h>
-# include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
-# include <limits.h>
 # include <stdarg.h>
-# include <stdbool.h>
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
@@ -99,7 +96,6 @@ typedef struct s_ray
 	int				texture;
 }					t_ray;
 
-
 typedef struct s_lst
 {
 	char			*str;
@@ -156,15 +152,14 @@ typedef struct s_rgb
 
 typedef struct s_cub
 {
-	char			*NO;
-	char			*SO;
-	char			*WE;
-	char			*EA;
-	t_rgb			*F;
-	t_rgb			*C;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	t_rgb			*f;
+	t_rgb			*c;
 	t_map			*map;
 }					t_cub;
-
 
 // ***********************************Display******************************** //
 void				img_pix_put(t_img *img, int x, int y, int color);
@@ -192,6 +187,8 @@ void				check_for_map(char *str, t_cub *cub);
 void				check_map(t_cub *cub);
 void				check_walls(t_cub *cub);
 void				ft_backtracking(t_cub *cub);
+void				initialize_f_c(t_cub *cub, char c);
+void				free_check_format_rgb(char *rgb, char *str, t_cub *cub);
 void				free_map(t_list *lst);
 void				free_cub(t_cub *cub);
 // ************************************Cub3D********************************* //

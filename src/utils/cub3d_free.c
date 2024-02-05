@@ -40,41 +40,13 @@ void	free_map(t_list *lst)
 	free(lst);
 }
 
-void	free_rgb(t_cub *cub)
-{
-	if (cub->F != NULL)
-		free(cub->F);
-	if (cub->C != NULL)
-		free(cub->C);
-}
-
-void	free_cub(t_cub *cub)
-{
-	if (cub->EA != NULL)
-		free(cub->EA);
-	if (cub->NO != NULL)
-		free(cub->NO);
-	if (cub->SO != NULL)
-		free(cub->SO);
-	if (cub->WE != NULL)
-		free(cub->WE);
-	free_rgb(cub);
-	if (cub->map->map_lst != NULL)
-		cub->map->map_lst = cub->map->start_map;
-	free_map(cub->map->map_lst);
-	if (cub->map->map_cloned != NULL)
-		cub->map->map_cloned = cub->map->start_map_cloned;
-	free_map(cub->map->map_cloned);
-	free(cub->map);
-}
-
 void	ft_free_exit(int i, t_vars *vars)
 {
 	ft_free_mlx(vars);
 	if (i == 0)
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	else
-		exit (EXIT_SUCCESS);
+		exit(EXIT_SUCCESS);
 }
 
 void	ft_free_mlx(t_vars *vars)
@@ -94,4 +66,3 @@ void	ft_free_mlx(t_vars *vars)
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
 }
-
