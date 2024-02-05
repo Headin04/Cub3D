@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:58:15 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 17:32:34 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/05 12:50:53 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,6 @@ void	ft_rayinit(t_vars *vars)
 	vars->ray.planx = ft_dir(vars->dir, 1, 0);
 	vars->ray.plany = ft_dir(vars->dir, 1, 1);
 }
-
-	// printf("vars->dir = %c\n", vars->dir);
-	// printf("vars->ray.dirx = %f\n", vars->ray.dirx);
-	// printf("vars->ray.diry =  %f\n", vars->ray.diry);
-	// printf("vars->ray.planx =  %f\n", vars->ray.planx);
-	// printf("vars->ray.plany =  %f\n", vars->ray.plany);
-// 	dirx; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
-// 	diry; //vecteur de direction (commence à -1 pour W, 1 pour E, 0 sinon)
-// 	planx; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
-// 	plany; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
 
 void	ft_ray_loopinit(t_vars *vars)
 {
