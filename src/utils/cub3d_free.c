@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:19:14 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/05 11:35:41 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/05 12:38:03 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,34 @@ void	free_map(t_list *lst)
 		lst = list;
 	}
 	free(lst);
+}
+
+void	free_rgb(t_cub *cub)
+{
+	if (cub->f != NULL)
+		free(cub->f);
+	if (cub->c != NULL)
+		free(cub->c);
+}
+
+void	free_cub(t_cub *cub)
+{
+	if (cub->ea != NULL)
+		free(cub->ea);
+	if (cub->no != NULL)
+		free(cub->no);
+	if (cub->so != NULL)
+		free(cub->so);
+	if (cub->we != NULL)
+		free(cub->we);
+	free_rgb(cub);
+	if (cub->map->map_lst != NULL)
+		cub->map->map_lst = cub->map->start_map;
+	free_map(cub->map->map_lst);
+	if (cub->map->map_cloned != NULL)
+		cub->map->map_cloned = cub->map->start_map_cloned;
+	free_map(cub->map->map_cloned);
+	free(cub->map);
 }
 
 void	ft_free_mlx(int error, t_vars *vars)

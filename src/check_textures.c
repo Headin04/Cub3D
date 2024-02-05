@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:50:06 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 15:51:46 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/05 11:41:23 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,32 +63,4 @@ bool	check_for_textures(char *str, t_cub *cub)
 	else if (cub->ea == NULL && check_for_dir(str, "EA", cub) == true)
 		return (cub->ea = ft_strdup(str + 3), true);
 	return (false);
-}
-
-void	free_rgb(t_cub *cub)
-{
-	if (cub->f != NULL)
-		free(cub->f);
-	if (cub->c != NULL)
-		free(cub->c);
-}
-
-void	free_cub(t_cub *cub)
-{
-	if (cub->ea != NULL)
-		free(cub->ea);
-	if (cub->no != NULL)
-		free(cub->no);
-	if (cub->so != NULL)
-		free(cub->so);
-	if (cub->we != NULL)
-		free(cub->we);
-	free_rgb(cub);
-	if (cub->map->map_lst != NULL)
-		cub->map->map_lst = cub->map->start_map;
-	free_map(cub->map->map_lst);
-	if (cub->map->map_cloned != NULL)
-		cub->map->map_cloned = cub->map->start_map_cloned;
-	free_map(cub->map->map_cloned);
-	free(cub->map);
 }

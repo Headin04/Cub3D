@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:51:11 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/05 11:39:15 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/05 12:37:27 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	ft_init_texture(t_vars *vars)
 	return (0);
 }
 
-void	ft_init_mlx(t_vars *vars, t_cub cub)
+void	ft_init_mlx(t_vars *vars, t_cub *cub)
 {
 	t_img	img;
 
@@ -49,11 +49,11 @@ void	ft_init_mlx(t_vars *vars, t_cub cub)
 		ft_free_mlx(0, vars);
 	vars->img = img;
 	ft_memset(vars->wall, 0, sizeof(t_img) * 4);
-	vars->wall[0].path = cub.no;
-	vars->wall[1].path = cub.so;
-	vars->wall[2].path = cub.ea;
-	vars->wall[3].path = cub.we;
-	vars->dir = cub.map->dir_player;
+	vars->wall[0].path = cub->no;
+	vars->wall[1].path = cub->so;
+	vars->wall[2].path = cub->ea;
+	vars->wall[3].path = cub->we;
+	vars->dir = cub->map->dir_player;
 	vars->rx = 0;
 	ft_init_texture(vars);
 }

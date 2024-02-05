@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:17:57 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/05 11:37:21 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/05 12:18:07 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-
-// typedef struct lst
-// {
-// 	char		*str;
-// 	int			i;
-// 	struct lst	*next;
-// 	struct lst	*back;
-// }				t_lst;
 
 typedef struct s_list
 {
@@ -182,11 +174,11 @@ void				free_check_format_rgb(char *rgb, char *str, t_cub *cub);
 void				free_map(t_list *lst);
 void				free_cub(t_cub *cub);
 // ************************************Cub3D********************************* //
-void				ft_mlx_start(t_cub *cub);
+void				ft_mlx_start(t_vars *vars);
 
 // ************************************Init********************************** //
 void				ft_init(t_cub *cub, int ac, char **av);
-void				ft_init_mlx(t_vars *vars, t_cub cub);
+void				ft_init_mlx(t_vars *vars, t_cub *cub);
 
 // ************************************Free********************************** //
 void				ft_free_split(char **split);

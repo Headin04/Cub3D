@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:54:27 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 15:54:29 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/05 12:38:29 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	initialize_f_c(t_cub *cub, char c)
 
 void	backtracking(t_list *alias, int x, t_cub *cub)
 {
-	printf("ici\n");
 	if (alias->content[x] == '1')
 		return ;
 	else if (alias->content[x] == '2')

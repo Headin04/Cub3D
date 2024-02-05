@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:20:11 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 16:26:32 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/05 12:48:55 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	ft_texture(t_vars *vars, int i, int x, int y)
 
 int	ft_display(t_vars *vars)
 {
-	if (vars->win == NULL || (!vars->sizey || !vars->sizey))
+	if (vars->win == NULL || (!vars->sizey || !vars->sizex))
 		return (1);
 	ft_background(vars);
 	ft_walls(vars);

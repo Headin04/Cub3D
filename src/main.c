@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:42:23 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 15:44:03 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/05 12:34:20 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	t_cub	cub;
+	t_vars	vars;
 
-	initialize(&cub);
-	check_file(argc, argv, &cub);
-	cub.map->map_cloned = cub.map->start_map_cloned;
-	ft_mlx_start(&cub);
-	free_cub(&cub);
+	initialize(&vars.cub);
+	check_file(argc, argv, &vars.cub);
+	vars.cub.map->map_cloned = vars.cub.map->start_map_cloned;
+	ft_mlx_start(&vars);
+	free_cub(&vars.cub);
 	return (0);
 }

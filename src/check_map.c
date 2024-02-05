@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:54:14 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 15:54:15 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/05 12:38:37 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ void	check_letters(t_list *alias, int i, t_cub *cub)
 		cub->map->dir_player = 'W';
 	else if (alias->content[i] != '1' && alias->content[i] != '0'
 		&& alias->content[i] != ' ')
-	{
-		printf("ici\n");
 		print_error_msg(WRONG_LETTERS, cub);
-	}
 }
 
 void	check_characters(t_cub *cub)
