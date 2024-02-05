@@ -50,6 +50,22 @@ t_list	*ft_lstnew(void *content)
 	return (NULL);
 }
 
+int	get_current_node_index(t_list *head, t_list *current)
+{
+	int		index;
+	t_list	*tmp;
+
+	index = 0;
+	tmp = head;
+	while (tmp != NULL)
+	{
+		if (tmp == current)
+			return (index);
+		index++;
+		tmp = tmp->next;
+	}
+	return (-1); // Nœud non trouvé
+}
 // void	ft_lstadd_back(t_struct *sl, t_lst **head, t_lst *new)
 // {
 // 	return(0);

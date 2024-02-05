@@ -122,6 +122,8 @@ typedef struct s_cub
 	char			*so;
 	char			*we;
 	char			*ea;
+	int				playerx;
+	int				playery;
 	t_rgb			*f;
 	t_rgb			*c;
 	t_map			*map;
@@ -141,7 +143,6 @@ typedef struct s_vars
 	t_ray			ray;
 	t_cub			cub;
 }					t_vars;
-
 
 // ***********************************Display******************************** //
 void				img_pix_put(t_img *img, int x, int y, int color);
@@ -214,6 +215,7 @@ t_list				*ft_lstnew(void *content);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 t_list				*ft_lstlast(t_list *lst);
 int					ft_lstsize(t_list *lst);
+int					get_current_node_index(t_list *head, t_list *current);
 // *********************************Keypress********************************* //
 int					ft_keycode(int keycode, t_vars *vars);
 // ********************************Raycasting******************************** //
