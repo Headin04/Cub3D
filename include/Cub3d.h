@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:17:57 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 16:35:15 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/05 10:28:36 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ typedef struct s_ray
 	int				texture;
 }					t_ray;
 
-
 typedef struct s_lst
 {
 	char			*str;
@@ -107,15 +106,6 @@ typedef struct s_lst
 	struct lst		*next;
 	struct lst		*back;
 }					t_lst;
-
-// typedef struct s_cub
-// {
-// 	char			**av;
-// 	int				ac;
-// 	int				move;
-// 	int				map_x;
-// 	int				map_y;
-// }					t_struct;
 
 typedef struct s_img
 {
@@ -129,23 +119,6 @@ typedef struct s_img
 	int				endian;
 	char			*path;
 }					t_img;
-
-typedef struct s_vars
-{
-	void			*mlx;
-	void			*win;
-	// void			*img;
-	char			dir;
-	int				rx;
-	int				ry;
-	int				sizex;
-	int				sizey;
-	// t_struct		cub;
-	t_img			wall[4];
-	t_img			img;
-	t_ray			ray;
-	// t_struct		*cub;
-}					t_vars;
 
 typedef struct s_rgb
 {
@@ -164,6 +137,21 @@ typedef struct s_cub
 	t_rgb			*C;
 	t_map			*map;
 }					t_cub;
+
+typedef struct s_vars
+{
+	void			*mlx;
+	void			*win;
+	char			dir;
+	int				rx;
+	int				ry;
+	int				sizex;
+	int				sizey;
+	t_img			wall[4];
+	t_img			img;
+	t_ray			ray;
+	t_cub			cub;
+}					t_vars;
 
 
 // ***********************************Display******************************** //
@@ -204,7 +192,7 @@ void				ft_init_mlx(t_vars *vars, t_cub cub);
 // ************************************Free********************************** //
 void				ft_free_split(char **split);
 void				ft_free_exit(int i, t_vars *vars);
-void				ft_free_mlx(t_vars *vars);
+void				ft_free_mlx(int i, t_vars *vars);
 // ***********************************Errors********************************* //
 
 // ************************************STR*********************************** //
