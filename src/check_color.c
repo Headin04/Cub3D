@@ -35,14 +35,6 @@ bool	char_to_int(t_rgb *rgb, char *str, int n)
 	return (true);
 }
 
-void	initialize_F_C(t_cub *cub, char c)
-{
-	if (c == 'F')
-		cub->F = malloc(sizeof(t_rgb));
-	else if (c == 'C')
-		cub->C = malloc(sizeof(t_rgb));
-}
-
 bool	rgb_to_int(char *rgb, t_cub *cub, char c)
 {
 	int		i;
@@ -51,7 +43,7 @@ bool	rgb_to_int(char *rgb, t_cub *cub, char c)
 
 	n = 0;
 	dest = NULL;
-	initialize_F_C(cub, c);
+	initialize_f_c(cub, c);
 	while (n++ != 3)
 	{
 		i = 0;
@@ -59,9 +51,9 @@ bool	rgb_to_int(char *rgb, t_cub *cub, char c)
 			i++;
 		dest = ft_strnjoin(NULL, rgb, i);
 		rgb = rgb + (i + 2);
-		if (c == 'F' && (char_to_int(cub->F, dest, n) == false))
+		if (c == 'F' && (char_to_int(cub->f, dest, n) == false))
 			return (free(dest), false);
-		else if (c == 'C' && (char_to_int(cub->C, dest, n) == false))
+		else if (c == 'C' && (char_to_int(cub->c, dest, n) == false))
 			return (free(dest), false);
 		free(dest);
 	}
@@ -85,21 +77,13 @@ void	check_format_rgb(char *rgb, t_cub *cub, char *str)
 		else if (rgb[i] == '\0')
 			return ;
 		else
-		{
-			free(rgb);
-			free(str);
-			print_error_msg(COLOR_FALSE, cub);
-		}
+			free_check_format_rgb(rgb, str, cub);
 	}
 	if (n >= 3)
-	{
-		free(rgb);
-		free(str);
-		print_error_msg(COLOR_FALSE, cub);
-	}
+		free_check_format_rgb(rgb, str, cub);
 }
 
-bool	Check_rgb(char *str, t_cub *cub, char c)
+bool	check_rgb(char *str, t_cub *cub, char c)
 {
 	int		i;
 	char	*rgb;
@@ -130,24 +114,24 @@ bool	Check_rgb(char *str, t_cub *cub, char c)
 
 bool	check_for_color(char *str, t_cub *cub, int n)
 {
-	if (cub->F == NULL && ft_strncmp(str, "F", 1) == 0)
+	if (cub->f == NULL && ft_strncmp(str, "F", 1) == 0)
 	{
 		if (n == 6)
 		{
 			free(str);
 			print_error_msg(COLOR_FALSE, cub);
 		}
-		if (Check_rgb(str, cub, 'F') == true)
+		if (check_rgb(str, cub, 'F') == true)
 			return (true);
 	}
-	else if (cub->C == NULL && ft_strncmp(str, "C", 1) == 0)
+	else if (cub->c == NULL && ft_strncmp(str, "C", 1) == 0)
 	{
 		if (n == 6)
 		{
 			free(str);
 			print_error_msg(COLOR_FALSE, cub);
 		}
-		if (Check_rgb(str, cub, 'C') == true)
+		if (check_rgb(str, cub, 'C') == true)
 			return (true);
 	}
 	return (false);

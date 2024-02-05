@@ -12,6 +12,14 @@
 
 #include "../include/Cub3d.h"
 
+void	initialize_f_c(t_cub *cub, char c)
+{
+	if (c == 'F')
+		cub->f = malloc(sizeof(t_rgb));
+	else if (c == 'C')
+		cub->c = malloc(sizeof(t_rgb));
+}
+
 void	backtracking(t_list *alias, int x, t_cub *cub)
 {
 	printf("ici\n");
@@ -41,15 +49,20 @@ void	ft_backtracking(t_cub *cub)
 	alias = cub->map->map_cloned;
 	while (alias != NULL)
 	{
-		// printf("ici\n");
 		x = 0;
 		while (alias->content[x] != '\0')
 		{
-			printf("content == %c\n", alias->content[x]);
 			if (alias->content[x] == '0')
 				backtracking(alias, x, cub);
 			x++;
 		}
 		alias = alias->next;
 	}
+}
+
+void	free_check_format_rgb(char *rgb, char *str, t_cub *cub)
+{
+	free(rgb);
+	free(str);
+	print_error_msg(COLOR_FALSE, cub);
 }

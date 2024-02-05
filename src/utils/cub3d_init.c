@@ -6,13 +6,13 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:51:11 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/05 11:26:30 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/05 11:39:15 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/Cub3d.h"
 
-static	int	ft_init_texture(t_vars *vars)
+static int	ft_init_texture(t_vars *vars)
 {
 	int		i;
 	t_img	wall[4];
@@ -21,8 +21,8 @@ static	int	ft_init_texture(t_vars *vars)
 	while (i < 4)
 	{
 		wall[i] = vars->wall[i];
-		wall[i].img = mlx_xpm_file_to_image(vars->mlx, wall[i].path, \
-			&wall[i].h, &wall[i].w);
+		wall[i].img = mlx_xpm_file_to_image(vars->mlx, wall[i].path, &wall[i].h,
+				&wall[i].w);
 		vars->wall[i] = wall[i];
 		if (!wall[i].img)
 			ft_free_mlx(0, vars);
@@ -43,16 +43,16 @@ void	ft_init_mlx(t_vars *vars, t_cub cub)
 	img.mlx_img = mlx_new_image(vars->mlx, vars->sizex, vars->sizey);
 	if (img.mlx_img == NULL)
 		ft_free_mlx(0, vars);
-	img.addr = (int *)mlx_get_data_addr(img.mlx_img, &img.bpp, \
-				&img.llen, &img.endian);
+	img.addr = (int *)mlx_get_data_addr(img.mlx_img, &img.bpp, &img.llen,
+			&img.endian);
 	if (img.addr == NULL)
 		ft_free_mlx(0, vars);
 	vars->img = img;
 	ft_memset(vars->wall, 0, sizeof(t_img) * 4);
-	vars->wall[0].path = cub.NO;
-	vars->wall[1].path = cub.SO;
-	vars->wall[2].path = cub.EA;
-	vars->wall[3].path = cub.WE;
+	vars->wall[0].path = cub.no;
+	vars->wall[1].path = cub.so;
+	vars->wall[2].path = cub.ea;
+	vars->wall[3].path = cub.we;
 	vars->dir = cub.map->dir_player;
 	vars->rx = 0;
 	ft_init_texture(vars);
