@@ -70,4 +70,6 @@ void	initialize(t_cub *cub)
 	cub->map->map_lst = NULL;
 	cub->map->map_cloned = NULL;
 	cub->map->dir_player = 0;
+	cub->playerx = -1;
+	cub->playery = -1;
 }

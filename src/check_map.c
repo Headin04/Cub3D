@@ -22,6 +22,11 @@ void	check_letters(t_list *alias, int i, t_cub *cub)
 		cub->map->dir_player = 'E';
 	else if (alias->content[i] == 'W' && cub->map->dir_player == 0)
 		cub->map->dir_player = 'W';
+	if (cub->playerx == -1 && cub->playery == -1 && cub->map->dir_player != 0)
+	{
+		cub->playerx = i;
+		cub->playery = get_current_node_index(cub->map->start_map, alias);
+	}
 	else if (alias->content[i] != '1' && alias->content[i] != '0'
 		&& alias->content[i] != ' ')
 		print_error_msg(WRONG_LETTERS, cub);
