@@ -6,89 +6,148 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:58:15 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/05 12:50:53 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/16 17:32:53 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/Cub3d.h"
 
-static	double	ft_dir(char dir, int n, int x)
-{
-	if (n == 0)
-	{
-		if ((dir == 'N' && x == 0) || (dir == 'W' && x == 1))
-			return (-1);
-		else if ((dir == 'S' && x == 0) || (dir == 'E' && x == 1))
-			return (1);
-	}
-	else
-	{
-		if ((dir == 'E' && x == 0) || (dir == 'N' && x == 1))
-			return (0.66);
-		else if ((dir == 'W' && x == 0) || (dir == 'S' && x == 1))
-			return (-0.66);
-	}
-	return (0);
-}
-
-void	ft_rayinit(t_vars *vars)
-{
-	vars->ray.x = 0;
-	vars->ray.posx = 10;
-	vars->ray.posy = 2;
-	vars->ray.dirx = ft_dir(vars->dir, 0, 0);
-	vars->ray.diry = ft_dir(vars->dir, 0, 1);
-	vars->ray.planx = ft_dir(vars->dir, 1, 0);
-	vars->ray.plany = ft_dir(vars->dir, 1, 1);
-}
-
-void	ft_ray_loopinit(t_vars *vars)
+void	ft_perpwalldist(t_vars *vars)
 {
 	t_ray	r;
 
 	r = vars->ray;
-	r.hit = 0;
-	r.perpwalldist = 0;
-	r.camerax = 2 * r.x / (double)vars->sizex - 1;
-	r.raydirx = r.dirx + r.planx * r.camerax;
-	r.raydiry = r.diry + r.plany * r.camerax;
-	r.mapx = r.posx;
-	r.mapy = r.posy;
+	if (r.side == 0)
+		r.perpwalldist = (r.mapx - r.posx + (1 - r.stepx) / 2) / r.raydirx;
+	else
+		r.perpwalldist = (r.mapy - r.posy + (1 - r.stepy) / 2) / r.raydiry;
+	r.lineheight = vars->sizey / r.perpwalldist;
+	r.drawstart = -r.lineheight / 2 + vars->sizey / 2;
+	r.drawend = r.lineheight / 2 + vars->sizey / 2;
+	if (r.drawstart < 0)
+		r.drawstart = 0;
+	if (r.drawend >= vars->sizey || r.drawend < 0)
+		r.drawend = vars->sizey - 1;
 	vars->ray = r;
+}
+
+
+int	ft_curr_map_square(t_vars *vars, int x, int y)
+{
+	int		i;
+	t_list	*map;
+
+	i = 0;
+	map = vars->cub.map->start_map;
+	while (map && i++ != y)
+		map = map->next;
+	if (map && ft_strlen(map->content) >= (size_t)x)
+	{
+		if ((map->content[x] - 48) == 0 || (map->content[x] - 48) == 1)
+			return (map->content[x] - 48);
+		return (0);
+	}
+	else
+		return (1);
+}
+
+// {
+// 	int		i;
+// 	t_list	*map;
+
+// 	i = 0;
+// 	map = vars->cub.map->start_map;
+// 	while (map && i++ != y)
+// 		map = map->next;
+// 	if (map && ft_strlen(map->content) >= (size_t)x)
+// 		return (map->content[x]);
+// 	else
+// 		return (-1);
+
+// }
+
+void	ft_find_wall(t_vars *vars)
+{
+	t_ray	r;
+
+	r = vars->ray;
+	while (r.hit == 0)
+	{
+		if (r.sidedistx < r.sidedisty)
+		{
+			r.sidedistx += r.deltadistx;
+			r.mapx += r.stepx;
+			r.side = 0;
+		}
+		else
+		{
+			r.sidedisty += r.deltadisty;
+			r.mapy += r.stepy;
+			r.side = 1;
+		}
+		r.hit = ft_curr_map_square(vars, r.mapx, r.mapy);
+	}
+	vars->ray = r;
+}
+
+void	ft_sidestep(t_vars *vars)
+{
+	t_ray	r;
+
+	r = vars->ray;
+	if (r.raydirx < 0)
+	{
+		r.stepx = -1;
+		r.sidedistx = (r.posx - (double)r.mapx) * r.deltadistx;
+	}
+	else
+	{
+		r.stepx = 1;
+		r.sidedistx = (r.mapx + 1.0 - r.posx) * r.deltadistx;
+	}
+	if (r.raydiry < 0)
+	{
+		r.stepy = -1;
+		r.sidedisty = (r.posy - (double)r.mapy) * r.deltadisty;
+	}
+	else
+	{
+		r.stepy = 1;
+		r.sidedisty = (r.mapy + 1.0 - r.posy) * r.deltadisty;
+	}
+	vars->ray = r;
+	ft_find_wall(vars);
 }
 
 
 void	ft_raycasting(t_vars *vars)
 {
-	ft_rayinit(vars);
+	int		x;
+	int		y;
+
+	x = 0;
+	vars->ray.x = 0;
 	while (vars->ray.x < vars->sizex)
 	{
 		ft_ray_loopinit(vars);
+		ft_sidestep(vars);
+		ft_perpwalldist(vars);
+		y = 0;
+		while (y < vars->sizey)
+		{
+			ft_draw(vars, x, y);
+			y++;
+		}
 		vars->ray.x++;
+		x++;
 	}
-
 }
 
-// 	double		posx; //position x du joueur
-// 	double		posy; //position y du joueur
-// 	double		dirx; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
-// 	double		diry; //vecteur de direction (commence à -1 pour W, 1 pour E, 0 sinon)
-// 	double		planx; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
-// 	double		plany; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
-// 	double		raydirx; //calcul de direction x du rayon
-// 	double		raydiry; //calcul de direction y du rayon
-// 	double		camerax; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
-// 	int			mapx; // coordonée x du carré dans lequel est pos
-// 	int			mapy; // coordonnée y du carré dans lequel est pos
-// 	double		sidedistx; //distance que le rayon parcours jusqu'au premier point d'intersection vertical (=un coté x)
-// 	double		sidedisty; //distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
-// 	double		deltadistx; //distance que rayon parcours entre chaque point d'intersection vertical
-// 	double		deltadisty; //distance que le rayon parcours entre chaque point d'intersection horizontal
-// 	int			stepx; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
-// 	int			stepy; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
-// 	int			hit; // 1 si un mur a ete touche, 0 sinon
-// 	int			side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
-// 	double		perpwalldist; // distance du joueur au mur
-// 	int			lineheight; //hauteur de la ligne a dessiner
-// 	int			drawstart; //position de debut ou il faut dessiner
-// 	int			drawend; //position de fin ou il faut dessiner
+
+			// if (y < vars->ray.drawstart || y > vars->ray.drawend)
+			// {
+			// 	if (y < (vars->sizey / 2))
+			// 		img_pix_put(&vars->img, x, y, BLUE_C);
+			// 	else
+			// 		img_pix_put(&vars->img, x, y, GREEN_C);
+			// }

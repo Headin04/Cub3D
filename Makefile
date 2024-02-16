@@ -6,7 +6,7 @@
 #    By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 13:15:36 by eewu              #+#    #+#              #
-#    Updated: 2024/02/05 11:32:37 by eewu             ###   ########.fr        #
+#    Updated: 2024/02/14 14:01:22 by eewu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRC				=	$(addprefix $(OBJDIR)/, 	\
 					src/utils/cub3d_keypress.c	\
 					src/utils/cub3d_display.c	\
 					src/utils/cub3d_ray.c		\
+					src/utils/cub3d_rayinit.c	\
+					src/utils/cub3d_minimap.c	\
 					src/check_file.c			\
 					src/check_textures.c 		\
 					src/check_color.c 			\

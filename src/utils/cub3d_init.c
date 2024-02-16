@@ -6,29 +6,43 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:51:11 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/05 12:37:27 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/16 16:54:52 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/Cub3d.h"
 
-static int	ft_init_texture(t_vars *vars)
+static void	ft_init_texture(t_vars *vars, t_cub *cub)
 {
 	int		i;
 	t_img	wall[4];
 
 	i = 0;
+	ft_memset(vars->wall, 0, sizeof(t_img) * 4);
+	vars->wall[0].path = cub->no;
+	vars->wall[1].path = cub->so;
+	vars->wall[2].path = cub->ea;
+	vars->wall[3].path = cub->we;
 	while (i < 4)
 	{
 		wall[i] = vars->wall[i];
-		wall[i].img = mlx_xpm_file_to_image(vars->mlx, wall[i].path, &wall[i].h,
-				&wall[i].w);
+		wall[i].img = mlx_xpm_file_to_image \
+			(vars->mlx, wall[i].path, &wall[i].h, &wall[i].w);
 		vars->wall[i] = wall[i];
 		if (!wall[i].img)
 			ft_free_mlx(0, vars);
 		i++;
 	}
-	return (0);
+}
+
+static void	ft_keyinit(t_vars *vars)
+{
+	vars->up = 0;
+	vars->down = 0;
+	vars->right = 0;
+	vars->left = 0;
+	vars->rotate_r = 0;
+	vars->rotate_l = 0;
 }
 
 void	ft_init_mlx(t_vars *vars, t_cub *cub)
@@ -48,12 +62,8 @@ void	ft_init_mlx(t_vars *vars, t_cub *cub)
 	if (img.addr == NULL)
 		ft_free_mlx(0, vars);
 	vars->img = img;
-	ft_memset(vars->wall, 0, sizeof(t_img) * 4);
-	vars->wall[0].path = cub->no;
-	vars->wall[1].path = cub->so;
-	vars->wall[2].path = cub->ea;
-	vars->wall[3].path = cub->we;
 	vars->dir = cub->map->dir_player;
 	vars->rx = 0;
-	ft_init_texture(vars);
+	ft_init_texture(vars, cub);
+	ft_keyinit(vars);
 }

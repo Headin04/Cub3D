@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:17:57 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/05 16:17:58 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/16 17:34:01 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,19 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/types.h>
+# include <sys/time.h>
 # include <unistd.h>
+# include <math.h>
 
 # define DEFAULT 0
+# define GREEN_C 0xFF00
+# define WHITE_C 0xFFFFFF
+# define BLACK_C 0x000000
+# define BLUE_C 0x0000FF
+# define RED_C 0xFF0000
+# define YELLOW_C 0xFFFF00
+# define BLUEGRAY_C 0xBFBFFE
+# define ORANGE_C 0xFF8000
 # define WRONG_ARGS 1
 # define WRONG_NAME 2
 # define PATH_FALSE 3
@@ -63,24 +73,24 @@ typedef struct s_ray
 {
 	double			posx;
 	double			posy;
+	double			camerax;
 	double			dirx;
 	double			diry;
 	double			planx;
 	double			plany;
 	double			raydirx;
 	double			raydiry;
-	double			camerax;
-	int				mapx;
-	int				mapy;
 	double			sidedistx;
 	double			sidedisty;
 	double			deltadistx;
 	double			deltadisty;
+	double			perpwalldist;
+	int				mapx;
+	int				mapy;
 	int				stepx;
 	int				stepy;
 	int				hit;
 	int				side;
-	double			perpwalldist;
 	int				lineheight;
 	int				drawstart;
 	int				drawend;
@@ -138,6 +148,13 @@ typedef struct s_vars
 	int				ry;
 	int				sizex;
 	int				sizey;
+	int				up;
+	int				down;
+	int				rotate_r;
+	int				rotate_l;
+	int				right;
+	int				left;
+	double			moovespeed;
 	t_img			wall[4];
 	t_img			img;
 	t_ray			ray;
@@ -150,6 +167,7 @@ void				ft_walls(t_vars *vars);
 int					ft_background(t_vars *vars);
 int					ft_texture(t_vars *vars, int i, int x, int y);
 int					ft_display(t_vars *vars);
+void				ft_draw(t_vars *vars, int x, int y);
 // *********************************Check_File******************************* //
 void				print_error_msg(int key, t_cub *cub);
 void				check_name(char **argv, t_cub *cub);
@@ -218,10 +236,22 @@ int					ft_lstsize(t_list *lst);
 int					get_current_node_index(t_list *head, t_list *current);
 // *********************************Keypress********************************* //
 int					ft_keycode(int keycode, t_vars *vars);
-// ********************************Raycasting******************************** //
+int					ft_keycode_r(int keycode, t_vars *vars);
+void				ft_dir_rightleft(t_vars *vars);
+void				ft_dir_updown(t_vars *vars);
+void				ft_rotate(t_vars *vars);
+// *******************************Raycast_init******************************* //
+double				ft_dir(char dir, int n, int x);
 void				ft_rayinit(t_vars *vars);
 void				ft_ray_loopinit(t_vars *vars);
+// ********************************Raycasting******************************** //
 void				ft_raycasting(t_vars *vars);
+void				ft_perpwalldist(t_vars *vars);
+int					ft_curr_map_square(t_vars *vars, int x, int y);
+void				ft_perpwalldist(t_vars *vars);
+
+// *********************************Minimap********************************** //
+void				ft_minimap(t_vars *vars);
 
 t_list				*get_previous(t_list *list, t_list *current);
 

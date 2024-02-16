@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:01:10 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/15 13:21:20 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/15 16:47:39 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,32 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 			*lst = new;
 	}
 }
+
+
+int	ft_lstsize(t_list *lst)
+{
+	int		i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
+// int	ft_lstsize(t_list *lst)
+// {
+// 	int	i;
+// 	t_list	*list;
+
+// 	i = 0;
+// 	whilte (lst)
+// 	{
+// 		lst = list.
+// 	}
+// 	return(0);
+// }
 // t_lst	*ft_lstcopy(t_struct *sl, t_lst *old_lst)
 // {
 // 	return(0);
@@ -98,7 +124,3 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 // 	return(0);
 // }
 
-// int	ft_lstsize(t_lst *lst)
-// {
-// 	return(0);
-// }
