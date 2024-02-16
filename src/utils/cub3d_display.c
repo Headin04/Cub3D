@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:20:11 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/16 16:58:26 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/16 17:54:47 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,82 +28,6 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 		i -= 8;
 	}
 }
-
-// void	ft_walls(t_vars *vars)
-// {
-// 	ft_raycasting(vars);
-// }
-
-
-// int	ft_background(t_vars *vars)
-// {
-// 	int		x;
-// 	int		y;
-// 	int		red_color;
-// 	int		green_color;
-
-// 	x = 0;
-// 	red_color = 0x0000FF;
-// 	green_color = 0xFF00;
-// 	while (x < vars->sizex)
-// 	{
-// 		y = 0;
-// 		while (y < vars->sizey)
-// 		{
-// 			if (y < vars->ray.drawstart || y > vars->ray.drawend)
-// 			{
-// 				if (y < (vars->sizey / 2))
-// 					img_pix_put(&vars->img, x, y, red_color);
-// 				else
-// 					img_pix_put(&vars->img, x, y, green_color);
-// 			}
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// 	return (0);
-// }
-
-// int	ft_wall(t_vars *vars, int bpp, int llen, int endian)
-// {
-// 	void	img;
-// 	int		*addr;
-// 	int		x;
-// 	int		y;
-
-// 	bpp = vars->wall[i].bpp;
-// 	llen = vars->wall[i].llen;
-// 	endian = vars->wall[i].endian;
-// 	addr = vars->wall[i].addr;
-// 	img = vars->wall[i].img;
-// 	addr = (int *)mlx_get_data_addr(img, &bpp, &llen, &endian);
-// 	while (x < vars->wall[i].w)
-// 	{
-// 		y = 0;
-// 		while (y < vars->wall[i].h)
-// 		{
-// 			vars->img.addr[y * vars->img.llen / 4 + x] = addr[y * llen / 4 + x];
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
-
-// int	ft_texture(t_vars *vars, int i, int x, int y)
-// {
-// 	t_img	wall[4];
-// 	void	img;
-// 	int		bpp;
-// 	int		llen;
-// 	int		endian;
-
-// 	while (i < 4)
-// 	{
-
-// 	}
-// 	return (0);
-// }
-
 
 void	ft_draw(t_vars *vars, int x, int y)
 {
