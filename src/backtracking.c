@@ -20,8 +20,12 @@ void	initialize_f_c(t_cub *cub, char c)
 		cub->c = malloc(sizeof(t_rgb));
 }
 
-void	backtracking(t_list *alias, int x, t_cub *cub)
+void	backtracking(t_list *alias, size_t x, t_cub *cub)
 {
+	// printf("y = %s\n", alias->content);
+	// printf("x= %zu\n", x);
+	if (x > ft_strlen(alias->content) - 1)
+		x = ft_strlen(alias->content);
 	if (alias->content[x] == '1')
 		return ;
 	else if (alias->content[x] == '2')
@@ -30,7 +34,7 @@ void	backtracking(t_list *alias, int x, t_cub *cub)
 		alias->content[x] = '2';
 	else if (alias->content[x] == '0')
 		alias->content[x] = '2';
-	else if (alias->content[x] == ' ')
+	else if (alias->content[x] == ' ' || alias->content[x] == '\0')
 		print_error_msg(LEAK_IN_WALL, cub);
 	backtracking(alias, x + 1, cub);
 	backtracking(alias, x - 1, cub);

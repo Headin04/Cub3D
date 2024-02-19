@@ -50,6 +50,8 @@ void	free_rgb(t_cub *cub)
 
 void	free_cub(t_cub *cub)
 {
+	if (cub->fd)
+		close(cub->fd);
 	if (cub->ea != NULL)
 		free(cub->ea);
 	if (cub->no != NULL)
@@ -76,7 +78,7 @@ void	ft_free_mlx(int error, t_vars *vars)
 	if (error > 0)
 	{
 		free_cub(&vars->cub);
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
@@ -92,4 +94,6 @@ void	ft_free_mlx(int error, t_vars *vars)
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
+	free_cub(&vars->cub);
+	exit(EXIT_FAILURE);
 }
