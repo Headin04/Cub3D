@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:17:57 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/20 14:27:33 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/20 15:58:33 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <math.h>
 # include <stdarg.h>
 # include <stdbool.h>
 # include <stddef.h>
@@ -25,10 +26,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <sys/types.h>
 # include <sys/time.h>
+# include <sys/types.h>
 # include <unistd.h>
-# include <math.h>
 
 # define DEFAULT 0
 # define GREEN_C 0xFF00
@@ -49,6 +49,8 @@
 # define TEX_SIZE 8
 # define TEX_OPEN 9
 # define MLX_ERROR 10
+# define WRONG_MAP 11
+# define IS_DIRECTORY 12
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -134,6 +136,7 @@ typedef struct s_rgb
 
 typedef struct s_cub
 {
+	int				fd;
 	char			*no;
 	char			*so;
 	char			*we;
@@ -192,6 +195,7 @@ void				initialize(t_cub *cub);
 char				*get_next_line_map(int fd);
 t_list				*cpy_lst(t_list *lst);
 void				check_must(char *str, t_cub *cub);
+void				check_directory(char **argv, t_cub *cub);
 // *******************************Check_Texture****************************** //
 void				my_open(char *str, t_cub *cub);
 bool				check_for_dir(char *str, char *dir, t_cub *cub);

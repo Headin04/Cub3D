@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:35:50 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/19 14:21:16 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/20 15:59:57 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	print_error_msg(int key, t_cub *cub)
 		perror("ERROR");
 	if (key == WRONG_ARGS)
 		printf("ERROR: Not enough or too much arguments\n");
+	if (key == IS_DIRECTORY)
+		printf("ERROR: The file is a directory\n");
 	if (key == WRONG_NAME)
 		printf("ERROR: Wrong name of file\n");
 	if (key == PATH_FALSE)
@@ -36,6 +38,8 @@ void	print_error_msg(int key, t_cub *cub)
 		printf("ERROR: Enable to open the Texture\n");
 	if (key == MLX_ERROR)
 		printf("ERROR: Enable to initialize the MLX\n");
+	if (key == WRONG_MAP)
+		printf("ERROR: The map is not readable\n");
 	free_cub(cub);
 	exit(1);
 }
@@ -61,6 +65,7 @@ void	check_file(int argc, char **argv, t_cub *cub)
 {
 	check_arg(argc, cub);
 	check_name(argv, cub);
+	check_directory(argv, cub);
 	check_must(argv[1], cub);
 }
 

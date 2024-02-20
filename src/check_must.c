@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:20:59 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/19 11:49:05 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/20 16:00:30 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ char	*get_next_line_map(int fd)
 	return (str);
 }
 
+void	check_directory(char **argv, t_cub *cub)
+{
+	int	fd;
+
+	fd = open(argv[1], __O_DIRECTORY);
+	if (fd != -1)
+	{
+		close(fd);
+		print_error_msg(IS_DIRECTORY, cub);
+	}
+}
+
 t_list	*cpy_lst(t_list *lst)
 {
 	t_list	*current;
@@ -42,16 +54,15 @@ t_list	*cpy_lst(t_list *lst)
 
 void	check_must(char *str, t_cub *cub)
 {
-	int	fd;
 	int	n;
 
 	n = 0;
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
+	cub->fd = open(str, O_RDONLY);
+	if (cub->fd == -1)
 		print_error_msg(DEFAULT, cub);
-	str = get_next_line_map(fd);
+	str = get_next_line_map(cub->fd);
 	if (!str)
-		exit(1);
+		print_error_msg(WRONG_MAP, cub);
 	while (str != NULL)
 	{
 		if (check_for_textures(str, cub) == true)
@@ -61,9 +72,9 @@ void	check_must(char *str, t_cub *cub)
 		else if (n == 6)
 			check_for_map(str, cub);
 		free(str);
-		str = get_next_line_map(fd);
+		str = get_next_line_map(cub->fd);
 	}
-	close(fd);
+	close(cub->fd);
 	cub->map->map_cloned = cpy_lst(cub->map->map_lst);
 	cub->map->start_map_cloned = cub->map->map_cloned;
 	check_map(cub);

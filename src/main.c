@@ -19,6 +19,11 @@ int	main(int argc, char **argv)
 	initialize(&vars.cub);
 	check_file(argc, argv, &vars.cub);
 	vars.cub.map->map_cloned = vars.cub.map->start_map_cloned;
+	// while (vars.cub.map->map_cloned != NULL)
+	// {
+	// 	printf("%s\n", vars.cub.map->map_cloned->content);
+	// 	vars.cub.map->map_cloned = vars.cub.map->map_cloned->next;
+	// }
 	ft_mlx_start(&vars);
 	free_cub(&vars.cub);
 	return (0);

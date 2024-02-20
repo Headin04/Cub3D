@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:19:14 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/20 15:40:09 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/20 16:01:04 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	free_rgb(t_cub *cub)
 
 void	free_cub(t_cub *cub)
 {
+	if (cub->fd)
+		close(cub->fd);
 	if (cub->ea != NULL)
 		free(cub->ea);
 	if (cub->no != NULL)
