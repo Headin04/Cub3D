@@ -1,7 +1,7 @@
-NO ./textures/wall_no.xpm
-SO ./textures/wall_su.xpm
-WE ./textures/wall_we.xpm
-EA ./textures/wall_es.xpm
+NO ./textures/01bricks1.xpm
+SO ./textures/blocks1.xpm
+WE ./textures/brick_wall.xpm
+EA ./textures/Dungeon_wall2.xpm
 
 F 0, 23, 155
 C 0, 43, 45

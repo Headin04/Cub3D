@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:10:19 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/16 17:58:16 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/17 11:47:54 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ double	ft_dir(char dir, int n, int x)
 
 void	ft_rayinit(t_vars *vars)
 {
-	vars->ray.posx = vars->cub.playerx;
-	vars->ray.posy = vars->cub.playery;
+	vars->ray.posx = vars->cub.playerx + 0.2;
+	vars->ray.posy = vars->cub.playery + 0.2;
 	vars->ray.dirx = ft_dir(vars->dir, 0, 1);
 	vars->ray.diry = ft_dir(vars->dir, 0, 0);
 	vars->ray.planx = ft_dir(vars->dir, 1, 1);

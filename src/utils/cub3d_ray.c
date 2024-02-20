@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:58:15 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/16 17:32:53 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/20 14:26:36 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_perpwalldist(t_vars *vars)
 	vars->ray = r;
 }
 
-
 int	ft_curr_map_square(t_vars *vars, int x, int y)
 {
 	int		i;
@@ -50,21 +49,6 @@ int	ft_curr_map_square(t_vars *vars, int x, int y)
 	else
 		return (1);
 }
-
-// {
-// 	int		i;
-// 	t_list	*map;
-
-// 	i = 0;
-// 	map = vars->cub.map->start_map;
-// 	while (map && i++ != y)
-// 		map = map->next;
-// 	if (map && ft_strlen(map->content) >= (size_t)x)
-// 		return (map->content[x]);
-// 	else
-// 		return (-1);
-
-// }
 
 void	ft_find_wall(t_vars *vars)
 {
@@ -119,35 +103,14 @@ void	ft_sidestep(t_vars *vars)
 	ft_find_wall(vars);
 }
 
-
 void	ft_raycasting(t_vars *vars)
 {
-	int		x;
-	int		y;
-
-	x = 0;
-	vars->ray.x = 0;
-	while (vars->ray.x < vars->sizex)
+	vars->ray.x = -1;
+	while (++vars->ray.x < vars->sizex)
 	{
 		ft_ray_loopinit(vars);
 		ft_sidestep(vars);
 		ft_perpwalldist(vars);
-		y = 0;
-		while (y < vars->sizey)
-		{
-			ft_draw(vars, x, y);
-			y++;
-		}
-		vars->ray.x++;
-		x++;
+		ft_put_in_buff(vars, -1);
 	}
 }
-
-
-			// if (y < vars->ray.drawstart || y > vars->ray.drawend)
-			// {
-			// 	if (y < (vars->sizey / 2))
-			// 		img_pix_put(&vars->img, x, y, BLUE_C);
-			// 	else
-			// 		img_pix_put(&vars->img, x, y, GREEN_C);
-			// }

@@ -6,86 +6,81 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:20:11 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/16 17:54:47 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/20 15:34:04 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/Cub3d.h"
 
-void	img_pix_put(t_img *img, int x, int y, int color)
+static	int	ft_texx(t_vars *vars, int texx, int texn)
 {
-	char	*pixel;
-	int		i;
-
-	i = img->bpp - 8;
-	pixel = (char *)img->addr + (y * img->llen + x * (img->bpp / 8));
-	while (i >= 0)
-	{
-		if (img->endian != 0)
-			*pixel++ = (color >> i) & 0xFF;
-		else
-			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
-		i -= 8;
-	}
+	if (vars->ray.side == 0 && vars->ray.raydirx < 0)
+		texx = vars->wall[texn].w - texx - 1;
+	if (vars->ray.side == 0 && vars->ray.raydirx >= 0)
+		texx = texx - vars->wall[texn].w - 1;
+	if (vars->ray.side == 1 && vars->ray.raydiry >= 0)
+		texx = vars->wall[texn].w - texx - 1;
+	return (texx);
 }
 
-void	ft_draw(t_vars *vars, int x, int y)
+void	ft_test_texture(t_vars *vars, int texn, int y)
 {
-	int	color;
+	int		texx;
+	int		texy;
+	double	step;
 
-	color = BLACK_C;
-	if (y < vars->ray.drawstart || y > vars->ray.drawend)
-	{
-		if (y < (vars->sizey / 2))
-			img_pix_put(&vars->img, x, y, BLUE_C);
-		else
-			img_pix_put(&vars->img, x, y, GREEN_C);
-	}
+	if (vars->ray.side == 0)
+		vars->wlx = vars->ray.posy + vars->ray.perpwalldist * vars->ray.raydiry;
 	else
+		vars->wlx = vars->ray.posx + vars->ray.perpwalldist * vars->ray.raydirx;
+	vars->wlx -= floor((vars->wlx));
+	step = 1.0 * vars->wall[0].h / vars->ray.lineheight;
+	texx = (int)(vars->wlx * (double)vars->wall[texn].w);
+	texx = ft_texx(vars, texx, texn);
+	vars->texpos = \
+	(vars->ray.drawstart - vars->sizey / 2 + vars->ray.lineheight / 2) * step;
+	while (++y <= vars->ray.drawend)
 	{
-		if (vars->ray.stepx == -1 && vars->ray.side == 0)
-			color = YELLOW_C;
-		else if (vars->ray.stepx == 1 && vars->ray.side == 0)
-			color = BLUEGRAY_C;
-		else if (vars->ray.stepy == -1 && vars->ray.side == 1)
-			color = ORANGE_C;
-		else if (vars->ray.stepy == 1 && vars->ray.side == 1)
-			color = RED_C;
-		img_pix_put(&vars->img, x, y, color);
+		texy = (int)vars->texpos & (vars->wall[texn].h - 1);
+		vars->texpos += step;
+		if (y < (vars->sizey - 1) && vars->ray.x < (vars->sizex - 1))
+			vars->img.addr[y * vars->img.llen / 4 + vars->ray.x] = \
+			vars->wall[texn].addr[texy * vars->wall[texn].llen / 4 + texx];
 	}
 }
 
-int	ft_texture(t_vars *vars, int i, int x, int y)
+void	ft_put_in_buff(t_vars *vars, int y)
 {
-	t_img	wall[4];
-
-	while (i < 4)
+	while (++y < vars->sizey)
 	{
-		if (vars->wall[i].img)
+		if (y < vars->ray.drawstart || y > vars->ray.drawend)
 		{
-			wall[i] = vars->wall[i];
-			wall[i].addr = (int *)mlx_get_data_addr
-				(wall[i].img, &wall[i].bpp, &wall[i].llen, &wall[i].endian);
-			while (x < wall[i].w)
-			{
-				y = 0;
-				while (y < wall[i].h)
-				{
-					vars->img.addr[y * vars->img.llen / 4 + x] = \
-						wall[i].addr[y * wall[i].llen / 4 + x];
-					y++;
-				}
-				x++;
-			}
-			vars->wall[i] = wall[i];
-			i++;
+			if (y < (vars->sizey / 2))
+				vars->img.addr[y * vars->img.llen / 4 + vars->ray.x] = \
+					vars->ceiling;
+			else
+				vars->img.addr[y * vars->img.llen / 4 + vars->ray.x] = \
+					vars->floor;
+		}
+		else
+		{
+			if (vars->ray.side == 0 && vars->ray.raydirx < 0)
+				ft_test_texture(vars, 0, vars->ray.drawstart - 1);
+			if (vars->ray.side == 0 && vars->ray.raydirx >= 0)
+				ft_test_texture(vars, 1, vars->ray.drawstart - 1);
+			if (vars->ray.side == 1 && vars->ray.raydiry < 0)
+				ft_test_texture(vars, 2, vars->ray.drawstart - 1);
+			if (vars->ray.side == 1 && vars->ray.raydiry >= 0)
+				ft_test_texture(vars, 3, vars->ray.drawstart - 1);
 		}
 	}
-	return (0);
 }
 
 int	ft_display(t_vars *vars)
 {
+	int	i;
+
+	i = -1;
 	if (vars->win == NULL || (!vars->sizey || !vars->sizex))
 		return (1);
 	ft_raycasting(vars);

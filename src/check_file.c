@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:35:50 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/05 12:02:42 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/19 14:21:16 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@ void	print_error_msg(int key, t_cub *cub)
 	if (key == LEAK_IN_WALL)
 		printf("ERROR: There is a leak\n");
 	if (key == DOUBLE_MAP)
-		printf("ERROR: The file contain two maps \n");
+		printf("ERROR: The file contain two maps\n");
+	if (key == TEX_SIZE)
+		printf("ERROR: The Texture is not 64 * 64\n");
+	if (key == TEX_OPEN)
+		printf("ERROR: Enable to open the Texture\n");
+	if (key == MLX_ERROR)
+		printf("ERROR: Enable to initialize the MLX\n");
 	free_cub(cub);
 	exit(1);
 }

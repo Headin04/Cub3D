@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:19:14 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/05 12:38:03 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/20 15:40:09 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,15 @@ void	ft_free_mlx(int error, t_vars *vars)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (error > 0)
-	{
-		free_cub(&vars->cub);
-		exit (EXIT_FAILURE);
-	}
+		print_error_msg(error + 9, &vars->cub);
 	else
 	{
-		while (i < 4)
+		while (++i < 4)
 		{
 			if (vars->wall[i].img)
 				mlx_destroy_image(vars->mlx, vars->wall[i].img);
-			i++;
 		}
 	}
 	if (vars->img.mlx_img)
@@ -92,4 +88,6 @@ void	ft_free_mlx(int error, t_vars *vars)
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
+	vars->free = 1;
+	print_error_msg(error, &vars->cub);
 }

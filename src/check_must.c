@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:20:59 by eewu              #+#    #+#             */
-/*   Updated: 2024/01/29 15:21:48 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/19 11:49:05 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	check_must(char *str, t_cub *cub)
 	if (fd == -1)
 		print_error_msg(DEFAULT, cub);
 	str = get_next_line_map(fd);
+	if (!str)
+		exit(1);
 	while (str != NULL)
 	{
 		if (check_for_textures(str, cub) == true)

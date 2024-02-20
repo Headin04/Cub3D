@@ -6,11 +6,11 @@
 #    By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 13:15:36 by eewu              #+#    #+#              #
-#    Updated: 2024/02/14 14:01:22 by eewu             ###   ########.fr        #
+#    Updated: 2024/02/20 15:50:57 by eewu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			=	cub
+NAME			=	cub3D
 
 INCLS			= 	include/*.h
 
@@ -25,6 +25,7 @@ SRC				=	$(addprefix $(OBJDIR)/, 	\
 					src/utils/ft_strdup.c 		\
 					src/utils/cub3d_init.c		\
 					src/utils/cub3d_keypress.c	\
+					src/utils/cub3d_free_int.c	\
 					src/utils/cub3d_display.c	\
 					src/utils/cub3d_ray.c		\
 					src/utils/cub3d_rayinit.c	\
@@ -43,7 +44,7 @@ OBJ				= 	$(SRC:.c=.o)
 
 OBJDIR			= 	obj
 
-CC				= 	cc
+CC				= 	cc 
 
 FLAGS			= 	-Wall -Wextra -Werror -g
 

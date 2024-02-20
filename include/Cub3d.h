@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:17:57 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/16 17:34:01 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/20 14:27:33 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@
 # define WRONG_LETTERS 5
 # define LEAK_IN_WALL 6
 # define DOUBLE_MAP 7
+# define TEX_SIZE 8
+# define TEX_OPEN 9
+# define MLX_ERROR 10
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -95,7 +98,8 @@ typedef struct s_ray
 	int				drawstart;
 	int				drawend;
 	int				x;
-	int				texture;
+	int				tex_x;
+	int				wall_x;
 }					t_ray;
 
 typedef struct s_lst
@@ -111,6 +115,8 @@ typedef struct s_img
 	void			*mlx_img;
 	void			*img;
 	int				*addr;
+	int				x;
+	int				y;
 	int				h;
 	int				w;
 	int				bpp;
@@ -148,12 +154,20 @@ typedef struct s_vars
 	int				ry;
 	int				sizex;
 	int				sizey;
+	int				ceiling;
+	int				floor;
+	int				wall_c;
+	double			wlx;
+	double			texpos;
 	int				up;
 	int				down;
 	int				rotate_r;
 	int				rotate_l;
 	int				right;
 	int				left;
+	int				free;
+	int				**tex_color;
+	int				**tex_buf;
 	double			moovespeed;
 	t_img			wall[4];
 	t_img			img;
@@ -167,7 +181,7 @@ void				ft_walls(t_vars *vars);
 int					ft_background(t_vars *vars);
 int					ft_texture(t_vars *vars, int i, int x, int y);
 int					ft_display(t_vars *vars);
-void				ft_draw(t_vars *vars, int x, int y);
+void				ft_put_in_buff(t_vars *vars, int y);
 // *********************************Check_File******************************* //
 void				print_error_msg(int key, t_cub *cub);
 void				check_name(char **argv, t_cub *cub);
@@ -196,13 +210,18 @@ void				free_cub(t_cub *cub);
 void				ft_mlx_start(t_vars *vars);
 
 // ************************************Init********************************** //
-void				ft_init(t_cub *cub, int ac, char **av);
+unsigned long		ft_convert_rgb(int r, int g, int b);
+void				ft_init_texture(t_vars *vars, t_cub *cub);
+void				ft_keyinit(t_vars *vars);
+// void				ft_init(t_cub *cub, int ac, char **av);
 void				ft_init_mlx(t_vars *vars, t_cub *cub);
-
 // ************************************Free********************************** //
 void				ft_free_split(char **split);
 void				ft_free_exit(int i, t_vars *vars);
 void				ft_free_mlx(int i, t_vars *vars);
+void				ft_free_tex_color(t_vars *vars, int **tex_color, int j);
+void				ft_free_buf(t_vars *vars, int **buf, int j);
+
 // ***********************************Errors********************************* //
 
 // ************************************STR*********************************** //
@@ -249,10 +268,8 @@ void				ft_raycasting(t_vars *vars);
 void				ft_perpwalldist(t_vars *vars);
 int					ft_curr_map_square(t_vars *vars, int x, int y);
 void				ft_perpwalldist(t_vars *vars);
-
 // *********************************Minimap********************************** //
 void				ft_minimap(t_vars *vars);
-
 t_list				*get_previous(t_list *list, t_list *current);
 
 #endif

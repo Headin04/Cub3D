@@ -6,7 +6,7 @@
 /*   By: eewu <eewu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:42:06 by eewu              #+#    #+#             */
-/*   Updated: 2024/02/16 17:57:25 by eewu             ###   ########.fr       */
+/*   Updated: 2024/02/20 15:51:26 by eewu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	ft_keycode_r(int keycode, t_vars *vars)
 		vars->down = 0;
 	return (0);
 }
-
 
 void	ft_dir_updown(t_vars *vars)
 {
